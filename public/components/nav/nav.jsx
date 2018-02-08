@@ -5,8 +5,9 @@ import React from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Button from 'react-bootstrap/lib/Button';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
-export default class ParentNav extends React.Component {
+class ParentNav extends React.Component {
 
   handleSubmitLogin(event) {
     console.log("you clicked a button that does nothing");
@@ -30,3 +31,5 @@ export default class ParentNav extends React.Component {
     )
   }
 }
+
+export default muiThemeable()(ParentNav);

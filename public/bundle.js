@@ -18304,7 +18304,7 @@ var Dashboard = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        'dashboard'
+        'World of Warships Battle Guide Dashboard component'
       );
     }
   }]);

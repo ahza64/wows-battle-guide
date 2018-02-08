@@ -8,7 +8,7 @@ class Dashboard extends React.Component {
   render () {
     return (
       <div>
-        dashboard
+        World of Warships Battle Guide Dashboard component
       </div>
     )
   }

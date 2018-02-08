@@ -1,5 +1,9 @@
 import React from 'react';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import ParentNav from './nav/nav.jsx';
+
 class Dashboard extends React.Component {
   constructor (props) {
     super(props);
@@ -7,9 +11,15 @@ class Dashboard extends React.Component {
 
   render () {
     return (
-      <div>
-        World of Warships Battle Guide Dashboard component
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <ParentNav
+          />
+          <div>
+            World of Warships Battle Guide Dashboard component
+          </div>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }

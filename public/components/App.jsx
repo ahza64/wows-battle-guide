@@ -2,12 +2,13 @@ import React from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-//this is used in conjunction with bootswatch slate, need to replace bootstrap css files
+//this is used in conjunction with bootswatch slate, need to replace bootstrap css files to work
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
 import ParentNav from './nav/nav.jsx';
+import Main from './Main.jsx';
 
-class Dashboard extends React.Component {
+export default class App extends React.Component {
   constructor (props) {
     super(props);
   }
@@ -16,15 +17,10 @@ class Dashboard extends React.Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <div>
-          <ParentNav
-          />
-          <div>
-            World of Warships Battle Guide Dashboard component
-          </div>
+          <ParentNav />
+          <Main />
         </div>
       </MuiThemeProvider>
     )
   }
 }
-
-export default Dashboard;

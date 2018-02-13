@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import Button from 'react-bootstrap/lib/Button';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
-class ParentNav extends React.Component {
+export default muiThemeable()(class ParentNav extends React.Component {
 
   handleSubmitLogin(event) {
     console.log("you clicked a button that does nothing");
@@ -18,7 +18,7 @@ class ParentNav extends React.Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <div>World of Warships Battle Guide (interm version 0)</div>
+            <div>World of Warships Battle Guide (interm version 1)</div>
           </Navbar.Brand>
 
         </Navbar.Header>
@@ -30,6 +30,4 @@ class ParentNav extends React.Component {
       </Navbar>
     )
   }
-}
-
-export default muiThemeable()(ParentNav);
+})

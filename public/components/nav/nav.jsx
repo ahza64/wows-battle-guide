@@ -1,6 +1,8 @@
 // Modules
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 // Styles
 import Nav from 'react-bootstrap/lib/Nav';
 import Navbar from 'react-bootstrap/lib/Navbar';
@@ -9,10 +11,6 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 
 export default muiThemeable()(class ParentNav extends React.Component {
 
-  handleSubmitLogin(event) {
-    console.log("you clicked a button that does nothing");
-  }
-
   render () {
     return (
       <Navbar>
@@ -20,11 +18,17 @@ export default muiThemeable()(class ParentNav extends React.Component {
           <Navbar.Brand>
             <div>World of Warships Battle Guide (interm version 1)</div>
           </Navbar.Brand>
-
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullRight>
-            <Button type="submit" onClick={event => this.handleSubmitLogin(event)}>Doesn't do anything yet</Button>
+            <Link to='/details'>
+              <Button
+                type="button"
+                onClick={ console.log("details clicked") }
+              >
+                  Details
+              </Button>
+            </Link>
           </Navbar.Form>
         </Navbar.Collapse>
       </Navbar>

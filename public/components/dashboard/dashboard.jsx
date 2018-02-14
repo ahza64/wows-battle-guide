@@ -8,7 +8,7 @@ export default class Dashboard extends React.Component {
   render () {
     return (
       <div>
-        World of Warships Battle Guide Dashboard component, frontend routing functional
+        World of Warships Battle Guide "Dashboard" component, frontend navigation
       </div>
     )
   }

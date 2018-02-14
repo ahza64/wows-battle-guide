@@ -16,7 +16,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <div>World of Warships Battle Guide (interm version 1)</div>
+            <div>World of Warships Battle Guide (interm version 2)</div>
           </Navbar.Brand>
         </Navbar.Header>
         <Navbar.Collapse>

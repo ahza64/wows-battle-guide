@@ -12,15 +12,17 @@ export default class Details extends React.Component {
   render () {
     return (
       <div>
+        <div>
+          World of Warships Battle Guide "Details" component, frontend navigation
+        </div>
         <Link to='/'>
           <Button
             type='button'
-            onClick={ console.log("dashboard button clicked") }
+            onClick={ console.log("dashboard clicked") }
           >
             Dashboard
           </Button>
         </Link>
-        World of Warships Battle Guide Details component, frontend routing functional
       </div>
     )
   }

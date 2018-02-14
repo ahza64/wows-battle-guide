@@ -44827,7 +44827,7 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             _react2.default.createElement(
               'div',
               null,
-              'World of Warships Battle Guide (interm version 1)'
+              'World of Warships Battle Guide (interm version 2)'
             )
           )
         ),
@@ -48670,7 +48670,7 @@ var Dashboard = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        'World of Warships Battle Guide Dashboard component, frontend routing functional'
+        'World of Warships Battle Guide "Dashboard" component, frontend navigation'
       );
     }
   }]);
@@ -48727,18 +48727,22 @@ var Details = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(
+          'div',
+          null,
+          'World of Warships Battle Guide "Details" component, frontend navigation'
+        ),
+        _react2.default.createElement(
           _reactRouterDom.Link,
           { to: '/' },
           _react2.default.createElement(
             _Button2.default,
             {
               type: 'button',
-              onClick: console.log("dashboard button clicked")
+              onClick: console.log("dashboard clicked")
             },
             'Dashboard'
           )
-        ),
-        'World of Warships Battle Guide Details component, frontend routing functional'
+        )
       );
     }
   }]);

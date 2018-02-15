@@ -15,14 +15,6 @@ export default class Details extends React.Component {
         <div>
           World of Warships Battle Guide "Details" component, frontend navigation
         </div>
-        <Link to='/'>
-          <Button
-            type='button'
-            onClick={ console.log("dashboard clicked") }
-          >
-            Dashboard
-          </Button>
-        </Link>
       </div>
     )
   }

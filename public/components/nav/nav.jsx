@@ -11,6 +11,26 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 
 export default muiThemeable()(class ParentNav extends React.Component {
 
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      dashButton: true
+    }
+  }
+
+  dashNav() {
+    if (this.state.dashButton) {
+      this.setState({
+        dashButton: false
+      })
+    } else {
+      this.setState({
+        dashButton: true
+      })
+    }
+  }
+
   render () {
     return (
       <Navbar>
@@ -21,12 +41,24 @@ export default muiThemeable()(class ParentNav extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullRight>
+            <Link to='/'>
+              <Button
+                disabled={this.state.dashButton}
+                active={this.state.dashButton}
+                type="button"
+                onClick={ () => this.dashNav() }
+              >
+                Dashboard
+              </Button>
+            </Link>
             <Link to='/details'>
               <Button
+                disabled={!this.state.dashButton}
+                active={!this.state.dashButton}
                 type="button"
-                onClick={ console.log("details clicked") }
+                onClick={ () => this.dashNav() }
               >
-                  Details
+                Details
               </Button>
             </Link>
           </Navbar.Form>

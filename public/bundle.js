@@ -44806,15 +44806,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
   _inherits(ParentNav, _React$Component);
 
-  function ParentNav() {
+  function ParentNav(props) {
     _classCallCheck(this, ParentNav);
 
-    return _possibleConstructorReturn(this, (ParentNav.__proto__ || Object.getPrototypeOf(ParentNav)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (ParentNav.__proto__ || Object.getPrototypeOf(ParentNav)).call(this, props));
+
+    _this.state = {
+      dashButton: true
+    };
+    return _this;
   }
 
   _createClass(ParentNav, [{
+    key: 'dashNav',
+    value: function dashNav() {
+      if (this.state.dashButton) {
+        this.setState({
+          dashButton: false
+        });
+      } else {
+        this.setState({
+          dashButton: true
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         _Navbar2.default,
         null,
@@ -44839,12 +44859,32 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             { pullRight: true },
             _react2.default.createElement(
               _reactRouterDom.Link,
+              { to: '/' },
+              _react2.default.createElement(
+                _Button2.default,
+                {
+                  disabled: this.state.dashButton,
+                  active: this.state.dashButton,
+                  type: 'button',
+                  onClick: function onClick() {
+                    return _this2.dashNav();
+                  }
+                },
+                'Dashboard'
+              )
+            ),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
               { to: '/details' },
               _react2.default.createElement(
                 _Button2.default,
                 {
+                  disabled: !this.state.dashButton,
+                  active: !this.state.dashButton,
                   type: 'button',
-                  onClick: console.log("details clicked")
+                  onClick: function onClick() {
+                    return _this2.dashNav();
+                  }
                 },
                 'Details'
               )
@@ -48730,18 +48770,6 @@ var Details = function (_React$Component) {
           'div',
           null,
           'World of Warships Battle Guide "Details" component, frontend navigation'
-        ),
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/' },
-          _react2.default.createElement(
-            _Button2.default,
-            {
-              type: 'button',
-              onClick: console.log("dashboard clicked")
-            },
-            'Dashboard'
-          )
         )
       );
     }

@@ -15,50 +15,52 @@ export default muiThemeable()(class ParentNav extends React.Component {
     super(props);
 
     this.state = {
-      dashButton: true
+      dashButton: 'dashboard'
     }
   }
 
-  dashNav() {
-    if (this.state.dashButton) {
-      this.setState({
-        dashButton: false
-      })
-    } else {
-      this.setState({
-        dashButton: true
-      })
-    }
+  dashNav(page) {
+    this.setState({
+      dashButton: page
+    })
   }
 
   render () {
+    var dashButton = this.state.dashButton;
     return (
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <div>World of Warships Battle Guide (interm version 2)</div>
+            <div>World of Warships Battle Guide (interm version 3)</div>
           </Navbar.Brand>
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullRight>
             <Link to='/'>
               <Button
-                disabled={this.state.dashButton}
-                active={this.state.dashButton}
+                active={(dashButton === 'dashboard')}
                 type="button"
-                onClick={ () => this.dashNav() }
+                onClick={ () => this.dashNav('dashboard') }
               >
                 Dashboard
               </Button>
             </Link>
             <Link to='/details'>
               <Button
-                disabled={!this.state.dashButton}
-                active={!this.state.dashButton}
+                active={(dashButton === 'details')}
                 type="button"
-                onClick={ () => this.dashNav() }
+                onClick={ () => this.dashNav('details') }
               >
                 Details
+              </Button>
+            </Link>
+            <Link to='/information'>
+              <Button
+                active={(dashButton === 'information')}
+                type="button"
+                onClick={ () => this.dashNav('information') }
+              >
+                Information
               </Button>
             </Link>
           </Navbar.Form>

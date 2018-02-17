@@ -44812,29 +44812,24 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ParentNav.__proto__ || Object.getPrototypeOf(ParentNav)).call(this, props));
 
     _this.state = {
-      dashButton: true
+      dashButton: 'dashboard'
     };
     return _this;
   }
 
   _createClass(ParentNav, [{
     key: 'dashNav',
-    value: function dashNav() {
-      if (this.state.dashButton) {
-        this.setState({
-          dashButton: false
-        });
-      } else {
-        this.setState({
-          dashButton: true
-        });
-      }
+    value: function dashNav(page) {
+      this.setState({
+        dashButton: page
+      });
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
+      var dashButton = this.state.dashButton;
       return _react2.default.createElement(
         _Navbar2.default,
         null,
@@ -44847,7 +44842,7 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             _react2.default.createElement(
               'div',
               null,
-              'World of Warships Battle Guide (interm version 2)'
+              'World of Warships Battle Guide (interm version 3)'
             )
           )
         ),
@@ -44863,11 +44858,10 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
               _react2.default.createElement(
                 _Button2.default,
                 {
-                  disabled: this.state.dashButton,
-                  active: this.state.dashButton,
+                  active: dashButton === 'dashboard',
                   type: 'button',
                   onClick: function onClick() {
-                    return _this2.dashNav();
+                    return _this2.dashNav('dashboard');
                   }
                 },
                 'Dashboard'
@@ -44879,14 +44873,28 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
               _react2.default.createElement(
                 _Button2.default,
                 {
-                  disabled: !this.state.dashButton,
-                  active: !this.state.dashButton,
+                  active: dashButton === 'details',
                   type: 'button',
                   onClick: function onClick() {
-                    return _this2.dashNav();
+                    return _this2.dashNav('details');
                   }
                 },
                 'Details'
+              )
+            ),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/information' },
+              _react2.default.createElement(
+                _Button2.default,
+                {
+                  active: dashButton === 'information',
+                  type: 'button',
+                  onClick: function onClick() {
+                    return _this2.dashNav('information');
+                  }
+                },
+                'Information'
               )
             )
           )
@@ -48631,6 +48639,10 @@ var _details = __webpack_require__(298);
 
 var _details2 = _interopRequireDefault(_details);
 
+var _info = __webpack_require__(335);
+
+var _info2 = _interopRequireDefault(_info);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48659,7 +48671,8 @@ var Main = function (_React$Component) {
           _reactRouterDom.Switch,
           null,
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _dashboard2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _details2.default })
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _details2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/information', component: _info2.default })
         )
       );
     }
@@ -48737,11 +48750,91 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(46);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _Button = __webpack_require__(290);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _Button2 = _interopRequireDefault(_Button);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Details = function (_React$Component) {
+  _inherits(Details, _React$Component);
+
+  function Details(props) {
+    _classCallCheck(this, Details);
+
+    return _possibleConstructorReturn(this, (Details.__proto__ || Object.getPrototypeOf(Details)).call(this, props));
+  }
+
+  _createClass(Details, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        'World of Warships Battle Guide "Details" component, frontend navigation'
+      );
+    }
+  }]);
+
+  return Details;
+}(_react2.default.Component);
+
+exports.default = Details;
+
+/***/ }),
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48767,9 +48860,24 @@ var Details = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(
-          'div',
+          'h1',
           null,
-          'World of Warships Battle Guide "Details" component, frontend navigation'
+          'Purpose of the Guide'
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Use this guide to determine how best to attack and defend aganst enemy ships, based on the ship you\'re playing'
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Keep this open on your phone or browser during battles to quickly get the most pertinent strengths and weakenesses of yourself and your enemy.'
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Use the details section to get a more indepth look, if the Dashboard isn\'t giving you enough details'
         )
       );
     }

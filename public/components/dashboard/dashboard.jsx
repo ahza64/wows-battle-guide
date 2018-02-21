@@ -18,7 +18,7 @@ export default class Dashboard extends React.Component {
         <Grid>
           <Row>
             <Col xsHidden md={4}>
-              Tier X, captain build
+              Tier X, captain build, select tier range for match
             </Col>
             <Col xs={6} md={4}>
               <Image src="../../images/PRSC110.png" rounded responsive />
@@ -39,7 +39,7 @@ export default class Dashboard extends React.Component {
               "Come schedule your beating"
             </Col>
           </Row>
-
+          <br/>
           <Row>
             <Col className="text-center">
               <DashboardTable/>

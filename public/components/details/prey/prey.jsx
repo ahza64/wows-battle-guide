@@ -6,12 +6,12 @@ import Col from 'react-bootstrap/lib/Col';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 
-export default class Food extends React.Component {
+export default class Prey extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      foodList:[
+      preyList:[
         "Shimakaze",
         "Gearing",
         "Z-52",
@@ -44,16 +44,16 @@ export default class Food extends React.Component {
                 value={this.state.selectedShip}
               >
                 {
-                  this.state.foodList.map((food, idx) => {
+                  this.state.preyList.map((prey, idx) => {
                     return (
-                      <option key={idx} value={food}>{food}</option>
+                      <option key={idx} value={prey}>{prey}</option>
                     )
                   })
                 }
               </FormControl>
             </Col>
             <Col>
-              Your enemy's ship Details
+              Your Prey's ship's Details
             </Col>
           </Row>
         </Grid>

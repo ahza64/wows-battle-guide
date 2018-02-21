@@ -39376,7 +39376,12 @@ var App = function (_React$Component) {
   function App(props) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.state = {
+      selectedShip: "Moskva"
+    };
+    return _this;
   }
 
   _createClass(App, [{
@@ -39388,8 +39393,12 @@ var App = function (_React$Component) {
         _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement(_nav2.default, null),
-          _react2.default.createElement(_Main2.default, null)
+          _react2.default.createElement(_nav2.default, {
+            selectedShip: this.state.selectedShip
+          }),
+          _react2.default.createElement(_Main2.default, {
+            selectedShip: this.state.selectedShip
+          })
         )
       );
     }
@@ -48788,7 +48797,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               _Col2.default,
               { xsHidden: true, md: 4 },
-              'Tier X, captain build'
+              'Tier X, captain build, select tier range for match'
             ),
             _react2.default.createElement(
               _Col2.default,
@@ -48827,6 +48836,7 @@ var Dashboard = function (_React$Component) {
               '"Come schedule your beating"'
             )
           ),
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
             _Row2.default,
             null,
@@ -48980,9 +48990,9 @@ var _shipDetails = __webpack_require__(315);
 
 var _shipDetails2 = _interopRequireDefault(_shipDetails);
 
-var _food = __webpack_require__(321);
+var _prey = __webpack_require__(490);
 
-var _food2 = _interopRequireDefault(_food);
+var _prey2 = _interopRequireDefault(_prey);
 
 var _Grid = __webpack_require__(272);
 
@@ -49046,18 +49056,18 @@ var Details = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                   _Tab2.default,
-                  { eventKey: 2, title: 'Food' },
-                  _react2.default.createElement(_food2.default, null)
+                  { eventKey: 2, title: 'Prey' },
+                  _react2.default.createElement(_prey2.default, null)
                 ),
                 _react2.default.createElement(
                   _Tab2.default,
-                  { eventKey: 3, title: 'Them\'s fightin words' },
-                  'fightin list, plus selected ship details'
+                  { eventKey: 3, title: 'Equal' },
+                  'Selectable List of Equal oponents, plus selected ship details'
                 ),
                 _react2.default.createElement(
                   _Tab2.default,
-                  { eventKey: 4, title: 'Sharks' },
-                  'sharks list, plus selected ship details'
+                  { eventKey: 4, title: 'Predators' },
+                  'Selectable list of Predators to you, plus selected ship details'
                 ),
                 _react2.default.createElement(
                   _Tab2.default,
@@ -49067,7 +49077,7 @@ var Details = function (_React$Component) {
                 _react2.default.createElement(
                   _Tab2.default,
                   { eventKey: 6, title: 'Edit' },
-                  'form to edit moskva'
+                  'form to edit your ship'
                 )
               )
             )
@@ -49529,6 +49539,14 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Panel = __webpack_require__(485);
+
+var _Panel2 = _interopRequireDefault(_Panel);
+
+var _Col = __webpack_require__(302);
+
+var _Col2 = _interopRequireDefault(_Col);
+
 var _Table = __webpack_require__(304);
 
 var _Table2 = _interopRequireDefault(_Table);
@@ -49565,153 +49583,170 @@ var DashboardTable = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(
-          _Table2.default,
-          null,
+          _Panel2.default,
+          { bsStyle: 'primary' },
           _react2.default.createElement(
-            'thead',
+            _Panel2.default.Heading,
             null,
             _react2.default.createElement(
-              'tr',
-              null,
-              _react2.default.createElement(
-                'th',
-                null,
-                'Food'
-              ),
-              _react2.default.createElement(
-                'th',
-                null,
-                'Them\'s fightin words'
-              ),
-              _react2.default.createElement(
-                'th',
-                null,
-                'Your Death'
-              )
+              _Panel2.default.Title,
+              { componentClass: 'h3' },
+              'The Bad Boys You\'ll be Fighting'
             )
           ),
           _react2.default.createElement(
-            'tbody',
+            _Panel2.default.Body,
             null,
             _react2.default.createElement(
-              'tr',
+              _Table2.default,
               null,
               _react2.default.createElement(
-                'td',
+                'thead',
                 null,
                 _react2.default.createElement(
-                  _ListGroup2.default,
+                  'tr',
                   null,
                   _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Shimakaze'
+                    'th',
+                    { className: 'text-center' },
+                    'Prey'
                   ),
                   _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Gearing'
+                    'th',
+                    { className: 'text-center' },
+                    'Equal'
                   ),
                   _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Z-52'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Khabarovsk'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Grozovoi'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Yueyang'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Hakuryu'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Midway'
+                    'th',
+                    { className: 'text-center' },
+                    'Predator'
                   )
                 )
               ),
               _react2.default.createElement(
-                'td',
+                'tbody',
                 null,
                 _react2.default.createElement(
-                  _ListGroup2.default,
+                  'tr',
                   null,
                   _react2.default.createElement(
-                    _ListGroupItem2.default,
+                    'td',
                     null,
-                    'Zao'
+                    _react2.default.createElement(
+                      _ListGroup2.default,
+                      null,
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        '-angles they pen you-Shimakaze-angles you pen them-'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        '-a note about why in catagory-Gearing'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Z-52'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Khabarovsk'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Grozovoi'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Yueyang'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Hakuryu'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Midway'
+                      )
+                    )
                   ),
                   _react2.default.createElement(
-                    _ListGroupItem2.default,
+                    'td',
                     null,
-                    'Des Moines'
+                    _react2.default.createElement(
+                      _ListGroup2.default,
+                      null,
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        '-color cordinate for HE/IFHE pen bow/deck-Zao'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Des Moines'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Hindenburg'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Moskva'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Minotaur'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Henri IV'
+                      )
+                    )
                   ),
                   _react2.default.createElement(
-                    _ListGroupItem2.default,
+                    'td',
                     null,
-                    'Hindenburg'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Moskva'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Minotaur'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Henri IV'
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'td',
-                null,
-                _react2.default.createElement(
-                  _ListGroup2.default,
-                  null,
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Yamato'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Montana'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Gro\xDFer Kurfurst'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'Conqueror'
-                  ),
-                  _react2.default.createElement(
-                    _ListGroupItem2.default,
-                    null,
-                    'France'
+                    _react2.default.createElement(
+                      _ListGroup2.default,
+                      null,
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        '-make selectable to remove matched ships-Yamato'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Montana'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Gro\xDFer Kurfurst'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'Conqueror'
+                      ),
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        null,
+                        'France'
+                      )
+                    )
                   )
                 )
               )
@@ -51519,7 +51554,7 @@ var ShipDetails = function (_React$Component) {
             _react2.default.createElement(
               _Col2.default,
               null,
-              'Your ship\'s details'
+              'Your ship in greater detail'
             )
           )
         )
@@ -52183,121 +52218,7 @@ exports.default = (0, _bootstrapUtils.bsClass)('dropdown', MenuItem);
 module.exports = exports['default'];
 
 /***/ }),
-/* 321 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Grid = __webpack_require__(272);
-
-var _Grid2 = _interopRequireDefault(_Grid);
-
-var _Row = __webpack_require__(301);
-
-var _Row2 = _interopRequireDefault(_Row);
-
-var _Col = __webpack_require__(302);
-
-var _Col2 = _interopRequireDefault(_Col);
-
-var _FormControl = __webpack_require__(316);
-
-var _FormControl2 = _interopRequireDefault(_FormControl);
-
-var _MenuItem = __webpack_require__(320);
-
-var _MenuItem2 = _interopRequireDefault(_MenuItem);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Food = function (_React$Component) {
-  _inherits(Food, _React$Component);
-
-  function Food(props) {
-    _classCallCheck(this, Food);
-
-    var _this = _possibleConstructorReturn(this, (Food.__proto__ || Object.getPrototypeOf(Food)).call(this, props));
-
-    _this.state = {
-      foodList: ["Shimakaze", "Gearing", "Z-52", "Khabarovsk", "Grozovoi", "Yueyang", "Hakuryu", "Midway"]
-    };
-
-    _this.handleChangeShip = _this.handleChangeShip.bind(_this);
-    return _this;
-  }
-
-  _createClass(Food, [{
-    key: 'handleChangeShip',
-    value: function handleChangeShip(e) {
-      this.setState({
-        selectedShip: e.target.value
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          _Grid2.default,
-          null,
-          _react2.default.createElement(
-            _Row2.default,
-            null,
-            _react2.default.createElement(
-              _Col2.default,
-              { md: 2 },
-              _react2.default.createElement(
-                _FormControl2.default,
-                {
-                  componentClass: 'select',
-                  onChange: this.handleChangeShip,
-                  value: this.state.selectedShip
-                },
-                this.state.foodList.map(function (food, idx) {
-                  return _react2.default.createElement(
-                    'option',
-                    { key: idx, value: food },
-                    food
-                  );
-                })
-              )
-            ),
-            _react2.default.createElement(
-              _Col2.default,
-              null,
-              'Your enemy\'s ship Details'
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Food;
-}(_react2.default.Component);
-
-exports.default = Food;
-
-/***/ }),
+/* 321 */,
 /* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -72025,6 +71946,1059 @@ var ObjectListAdapter = function (_KeyedListAdapter) {
 }(_KeyedListAdapter3['default']);
 
 exports['default'] = ObjectListAdapter;
+
+/***/ }),
+/* 483 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(7);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = __webpack_require__(6);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(9);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(10);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _bootstrapUtils = __webpack_require__(15);
+
+var _Collapse = __webpack_require__(275);
+
+var _Collapse2 = _interopRequireDefault(_Collapse);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var propTypes = {
+  /**
+   * Callback fired before the component expands
+   */
+  onEnter: _propTypes2.default.func,
+  /**
+   * Callback fired after the component starts to expand
+   */
+  onEntering: _propTypes2.default.func,
+  /**
+   * Callback fired after the component has expanded
+   */
+  onEntered: _propTypes2.default.func,
+  /**
+   * Callback fired before the component collapses
+   */
+  onExit: _propTypes2.default.func,
+  /**
+   * Callback fired after the component starts to collapse
+   */
+  onExiting: _propTypes2.default.func,
+  /**
+   * Callback fired after the component has collapsed
+   */
+  onExited: _propTypes2.default.func
+};
+
+var contextTypes = {
+  $bs_panel: _propTypes2.default.shape({
+    headingId: _propTypes2.default.string,
+    bodyId: _propTypes2.default.string,
+    bsClass: _propTypes2.default.string,
+    expanded: _propTypes2.default.bool
+  })
+};
+
+var PanelCollapse = function (_React$Component) {
+  (0, _inherits3.default)(PanelCollapse, _React$Component);
+
+  function PanelCollapse() {
+    (0, _classCallCheck3.default)(this, PanelCollapse);
+    return (0, _possibleConstructorReturn3.default)(this, _React$Component.apply(this, arguments));
+  }
+
+  PanelCollapse.prototype.render = function render() {
+    var children = this.props.children;
+
+    var _ref = this.context.$bs_panel || {},
+        headingId = _ref.headingId,
+        bodyId = _ref.bodyId,
+        _bsClass = _ref.bsClass,
+        expanded = _ref.expanded;
+
+    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(this.props),
+        bsProps = _splitBsProps[0],
+        props = _splitBsProps[1];
+
+    bsProps.bsClass = _bsClass || bsProps.bsClass;
+
+    if (headingId && bodyId) {
+      props.id = bodyId;
+      props.role = props.role || 'tabpanel';
+      props['aria-labelledby'] = headingId;
+    }
+
+    return _react2.default.createElement(
+      _Collapse2.default,
+      (0, _extends3.default)({ 'in': expanded }, props),
+      _react2.default.createElement(
+        'div',
+        { className: (0, _bootstrapUtils.prefix)(bsProps, 'collapse') },
+        children
+      )
+    );
+  };
+
+  return PanelCollapse;
+}(_react2.default.Component);
+
+PanelCollapse.propTypes = propTypes;
+PanelCollapse.contextTypes = contextTypes;
+
+exports.default = (0, _bootstrapUtils.bsClass)('panel', PanelCollapse);
+module.exports = exports['default'];
+
+/***/ }),
+/* 484 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _objectWithoutProperties2 = __webpack_require__(11);
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _classCallCheck2 = __webpack_require__(6);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(9);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(10);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(14);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _elementType = __webpack_require__(353);
+
+var _elementType2 = _interopRequireDefault(_elementType);
+
+var _SafeAnchor = __webpack_require__(294);
+
+var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
+
+var _createChainedFunction = __webpack_require__(36);
+
+var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var propTypes = {
+  /**
+   * only here to satisfy linting, just the html onClick handler.
+   *
+   * @private
+   */
+  onClick: _propTypes2.default.func,
+  /**
+   * You can use a custom element for this component
+   */
+  componentClass: _elementType2.default
+};
+
+var defaultProps = {
+  componentClass: _SafeAnchor2.default
+};
+
+var contextTypes = {
+  $bs_panel: _propTypes2.default.shape({
+    bodyId: _propTypes2.default.string,
+    onToggle: _propTypes2.default.func,
+    expanded: _propTypes2.default.bool
+  })
+};
+
+var PanelToggle = function (_React$Component) {
+  (0, _inherits3.default)(PanelToggle, _React$Component);
+
+  function PanelToggle() {
+    (0, _classCallCheck3.default)(this, PanelToggle);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var _this = (0, _possibleConstructorReturn3.default)(this, _React$Component.call.apply(_React$Component, [this].concat(args)));
+
+    _this.handleToggle = _this.handleToggle.bind(_this);
+    return _this;
+  }
+
+  PanelToggle.prototype.handleToggle = function handleToggle(event) {
+    var _ref = this.context.$bs_panel || {},
+        onToggle = _ref.onToggle;
+
+    if (onToggle) {
+      onToggle(event);
+    }
+  };
+
+  PanelToggle.prototype.render = function render() {
+    var _props = this.props,
+        onClick = _props.onClick,
+        className = _props.className,
+        componentClass = _props.componentClass,
+        props = (0, _objectWithoutProperties3.default)(_props, ['onClick', 'className', 'componentClass']);
+
+    var _ref2 = this.context.$bs_panel || {},
+        expanded = _ref2.expanded,
+        bodyId = _ref2.bodyId;
+
+    var Component = componentClass;
+
+    props.onClick = (0, _createChainedFunction2.default)(onClick, this.handleToggle);
+
+    props['aria-expanded'] = expanded;
+    props.className = (0, _classnames2.default)(className, !expanded && 'collapsed');
+
+    if (bodyId) {
+      props['aria-controls'] = bodyId;
+    }
+
+    return _react2.default.createElement(Component, props);
+  };
+
+  return PanelToggle;
+}(_react2.default.Component);
+
+PanelToggle.propTypes = propTypes;
+PanelToggle.defaultProps = defaultProps;
+PanelToggle.contextTypes = contextTypes;
+
+exports.default = PanelToggle;
+module.exports = exports['default'];
+
+/***/ }),
+/* 485 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+exports.__esModule = true;
+
+var _assign = __webpack_require__(258);
+
+var _assign2 = _interopRequireDefault(_assign);
+
+var _values = __webpack_require__(291);
+
+var _values2 = _interopRequireDefault(_values);
+
+var _extends2 = __webpack_require__(7);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = __webpack_require__(6);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(9);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(10);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _classnames = __webpack_require__(14);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _uncontrollable = __webpack_require__(269);
+
+var _uncontrollable2 = _interopRequireDefault(_uncontrollable);
+
+var _warning = __webpack_require__(3);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _bootstrapUtils = __webpack_require__(15);
+
+var _StyleConfig = __webpack_require__(71);
+
+var _PanelBody = __webpack_require__(486);
+
+var _PanelBody2 = _interopRequireDefault(_PanelBody);
+
+var _PanelHeading = __webpack_require__(487);
+
+var _PanelHeading2 = _interopRequireDefault(_PanelHeading);
+
+var _PanelTitle = __webpack_require__(488);
+
+var _PanelTitle2 = _interopRequireDefault(_PanelTitle);
+
+var _PanelFooter = __webpack_require__(489);
+
+var _PanelFooter2 = _interopRequireDefault(_PanelFooter);
+
+var _PanelToggle = __webpack_require__(484);
+
+var _PanelToggle2 = _interopRequireDefault(_PanelToggle);
+
+var _PanelCollapse = __webpack_require__(483);
+
+var _PanelCollapse2 = _interopRequireDefault(_PanelCollapse);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var has = Object.prototype.hasOwnProperty;
+
+var defaultGetId = function defaultGetId(id, type) {
+  return id ? id + '--' + type : null;
+};
+
+var propTypes = {
+  /**
+   * Controls the collapsed/expanded state ofthe Panel. Requires
+   * a `Panel.Collapse` or `<Panel.Body collapsible>` child component
+   * in order to actually animate out or in.
+   *
+   * @controllable onToggle
+   */
+  expanded: _propTypes2.default.bool,
+  /**
+   * A callback fired when the collapse state changes.
+   *
+   * @controllable expanded
+   */
+  onToggle: _propTypes2.default.func,
+  eventKey: _propTypes2.default.any,
+
+  /**
+   * An HTML `id` attribute uniquely identifying the Panel component.
+   */
+  id: _propTypes2.default.string
+};
+
+var contextTypes = {
+  $bs_panelGroup: _propTypes2.default.shape({
+    getId: _propTypes2.default.func,
+    activeKey: _propTypes2.default.any,
+    onToggle: _propTypes2.default.func
+  })
+};
+
+var childContextTypes = {
+  $bs_panel: _propTypes2.default.shape({
+    headingId: _propTypes2.default.string,
+    bodyId: _propTypes2.default.string,
+    bsClass: _propTypes2.default.string,
+    onToggle: _propTypes2.default.func,
+    expanded: _propTypes2.default.bool
+  })
+};
+
+var Panel = function (_React$Component) {
+  (0, _inherits3.default)(Panel, _React$Component);
+
+  function Panel() {
+    var _temp, _this, _ret;
+
+    (0, _classCallCheck3.default)(this, Panel);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.handleToggle = function (e) {
+      var panelGroup = _this.context.$bs_panelGroup;
+      var expanded = !_this.getExpanded();
+
+      if (panelGroup && panelGroup.onToggle) {
+        panelGroup.onToggle(_this.props.eventKey, expanded, e);
+      } else {
+        _this.props.onToggle(expanded, e);
+      }
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+  }
+
+  Panel.prototype.getChildContext = function getChildContext() {
+    var _props = this.props,
+        eventKey = _props.eventKey,
+        id = _props.id;
+
+    var idKey = eventKey == null ? id : eventKey;
+
+    var ids = void 0;
+
+    if (idKey !== null) {
+      var panelGroup = this.context.$bs_panelGroup;
+      var getId = panelGroup && panelGroup.getId || defaultGetId;
+
+      ids = {
+        headingId: getId(idKey, 'heading'),
+        bodyId: getId(idKey, 'body')
+      };
+    }
+
+    return {
+      $bs_panel: (0, _extends3.default)({}, ids, {
+        bsClass: this.props.bsClass,
+        expanded: this.getExpanded(),
+        onToggle: this.handleToggle
+      })
+    };
+  };
+
+  Panel.prototype.getExpanded = function getExpanded() {
+    var panelGroup = this.context.$bs_panelGroup;
+
+    if (panelGroup && has.call(panelGroup, 'activeKey')) {
+      process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(this.props.expanded == null, 'Specifying `<Panel>` `expanded` in the context of an accordion ' + '`<PanelGroup>` is not supported. Set `activeKey` on the ' + '`<PanelGroup>` instead.') : void 0;
+
+      return panelGroup.activeKey === this.props.eventKey;
+    }
+
+    return !!this.props.expanded;
+  };
+
+  Panel.prototype.render = function render() {
+    var _props2 = this.props,
+        className = _props2.className,
+        children = _props2.children;
+
+    var _splitBsPropsAndOmit = (0, _bootstrapUtils.splitBsPropsAndOmit)(this.props, ['onToggle', 'eventKey', 'expanded']),
+        bsProps = _splitBsPropsAndOmit[0],
+        props = _splitBsPropsAndOmit[1];
+
+    return _react2.default.createElement(
+      'div',
+      (0, _extends3.default)({}, props, { className: (0, _classnames2.default)(className, (0, _bootstrapUtils.getClassSet)(bsProps)) }),
+      children
+    );
+  };
+
+  return Panel;
+}(_react2.default.Component);
+
+Panel.propTypes = propTypes;
+
+Panel.contextTypes = contextTypes;
+Panel.childContextTypes = childContextTypes;
+
+var UncontrolledPanel = (0, _uncontrollable2.default)((0, _bootstrapUtils.bsClass)('panel', (0, _bootstrapUtils.bsStyles)([].concat((0, _values2.default)(_StyleConfig.State), [_StyleConfig.Style.DEFAULT, _StyleConfig.Style.PRIMARY]), _StyleConfig.Style.DEFAULT, Panel)), { expanded: 'onToggle' });
+
+(0, _assign2.default)(UncontrolledPanel, {
+  Heading: _PanelHeading2.default,
+  Title: _PanelTitle2.default,
+  Body: _PanelBody2.default,
+  Footer: _PanelFooter2.default,
+  Toggle: _PanelToggle2.default,
+  Collapse: _PanelCollapse2.default
+});
+
+exports.default = UncontrolledPanel;
+module.exports = exports['default'];
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ }),
+/* 486 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(7);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = __webpack_require__(6);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(9);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(10);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(14);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _bootstrapUtils = __webpack_require__(15);
+
+var _PanelCollapse = __webpack_require__(483);
+
+var _PanelCollapse2 = _interopRequireDefault(_PanelCollapse);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var propTypes = {
+  /**
+   * A convenience prop that renders a Collapse component around the Body for
+   * situations when the parent Panel only contains a single Panel.Body child.
+   *
+   * renders:
+   * ```jsx
+   * <Panel.Collapse>
+   *  <Panel.Body />
+   * </Panel.Collapse>
+   * ```
+   */
+  collapsible: _propTypes2.default.bool.isRequired
+};
+
+var defaultProps = {
+  collapsible: false
+};
+
+var contextTypes = {
+  $bs_panel: _propTypes2.default.shape({
+    bsClass: _propTypes2.default.string
+  })
+};
+
+var PanelBody = function (_React$Component) {
+  (0, _inherits3.default)(PanelBody, _React$Component);
+
+  function PanelBody() {
+    (0, _classCallCheck3.default)(this, PanelBody);
+    return (0, _possibleConstructorReturn3.default)(this, _React$Component.apply(this, arguments));
+  }
+
+  PanelBody.prototype.render = function render() {
+    var _props = this.props,
+        children = _props.children,
+        className = _props.className,
+        collapsible = _props.collapsible;
+
+    var _ref = this.context.$bs_panel || {},
+        _bsClass = _ref.bsClass;
+
+    var _splitBsPropsAndOmit = (0, _bootstrapUtils.splitBsPropsAndOmit)(this.props, ['collapsible']),
+        bsProps = _splitBsPropsAndOmit[0],
+        elementProps = _splitBsPropsAndOmit[1];
+
+    bsProps.bsClass = _bsClass || bsProps.bsClass;
+
+    var body = _react2.default.createElement(
+      'div',
+      (0, _extends3.default)({}, elementProps, { className: (0, _classnames2.default)(className, (0, _bootstrapUtils.prefix)(bsProps, 'body')) }),
+      children
+    );
+
+    if (collapsible) {
+      body = _react2.default.createElement(
+        _PanelCollapse2.default,
+        null,
+        body
+      );
+    }
+
+    return body;
+  };
+
+  return PanelBody;
+}(_react2.default.Component);
+
+PanelBody.propTypes = propTypes;
+PanelBody.defaultProps = defaultProps;
+PanelBody.contextTypes = contextTypes;
+
+exports.default = (0, _bootstrapUtils.bsClass)('panel', PanelBody);
+module.exports = exports['default'];
+
+/***/ }),
+/* 487 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(7);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = __webpack_require__(11);
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _classCallCheck2 = __webpack_require__(6);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(9);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(10);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(14);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _elementType = __webpack_require__(353);
+
+var _elementType2 = _interopRequireDefault(_elementType);
+
+var _bootstrapUtils = __webpack_require__(15);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var propTypes = {
+  componentClass: _elementType2.default
+};
+
+var defaultProps = {
+  componentClass: 'div'
+};
+
+var contextTypes = {
+  $bs_panel: _propTypes2.default.shape({
+    headingId: _propTypes2.default.string,
+    bsClass: _propTypes2.default.string
+  })
+};
+
+var PanelHeading = function (_React$Component) {
+  (0, _inherits3.default)(PanelHeading, _React$Component);
+
+  function PanelHeading() {
+    (0, _classCallCheck3.default)(this, PanelHeading);
+    return (0, _possibleConstructorReturn3.default)(this, _React$Component.apply(this, arguments));
+  }
+
+  PanelHeading.prototype.render = function render() {
+    var _props = this.props,
+        children = _props.children,
+        className = _props.className,
+        Component = _props.componentClass,
+        props = (0, _objectWithoutProperties3.default)(_props, ['children', 'className', 'componentClass']);
+
+    var _ref = this.context.$bs_panel || {},
+        headingId = _ref.headingId,
+        _bsClass = _ref.bsClass;
+
+    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
+        bsProps = _splitBsProps[0],
+        elementProps = _splitBsProps[1];
+
+    bsProps.bsClass = _bsClass || bsProps.bsClass;
+
+    if (headingId) {
+      elementProps.role = elementProps.role || 'tab';
+      elementProps.id = headingId;
+    }
+
+    return _react2.default.createElement(
+      Component,
+      (0, _extends3.default)({}, elementProps, {
+        className: (0, _classnames2.default)(className, (0, _bootstrapUtils.prefix)(bsProps, 'heading'))
+      }),
+      children
+    );
+  };
+
+  return PanelHeading;
+}(_react2.default.Component);
+
+PanelHeading.propTypes = propTypes;
+PanelHeading.defaultProps = defaultProps;
+PanelHeading.contextTypes = contextTypes;
+
+exports.default = (0, _bootstrapUtils.bsClass)('panel', PanelHeading);
+module.exports = exports['default'];
+
+/***/ }),
+/* 488 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(7);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = __webpack_require__(11);
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _classCallCheck2 = __webpack_require__(6);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(9);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(10);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _classnames = __webpack_require__(14);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _elementType = __webpack_require__(353);
+
+var _elementType2 = _interopRequireDefault(_elementType);
+
+var _bootstrapUtils = __webpack_require__(15);
+
+var _PanelToggle = __webpack_require__(484);
+
+var _PanelToggle2 = _interopRequireDefault(_PanelToggle);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var propTypes = {
+  componentClass: _elementType2.default,
+  /**
+   * A convenience prop that renders the Panel.Title as a panel collapse toggle component
+   * for the common use-case.
+   */
+  toggle: _propTypes2.default.bool
+};
+
+var contextTypes = {
+  $bs_panel: _propTypes2.default.shape({
+    bsClass: _propTypes2.default.string
+  })
+};
+
+var defaultProps = {
+  componentClass: 'div'
+};
+
+var PanelTitle = function (_React$Component) {
+  (0, _inherits3.default)(PanelTitle, _React$Component);
+
+  function PanelTitle() {
+    (0, _classCallCheck3.default)(this, PanelTitle);
+    return (0, _possibleConstructorReturn3.default)(this, _React$Component.apply(this, arguments));
+  }
+
+  PanelTitle.prototype.render = function render() {
+    var _props = this.props,
+        children = _props.children,
+        className = _props.className,
+        toggle = _props.toggle,
+        Component = _props.componentClass,
+        props = (0, _objectWithoutProperties3.default)(_props, ['children', 'className', 'toggle', 'componentClass']);
+
+    var _ref = this.context.$bs_panel || {},
+        _bsClass = _ref.bsClass;
+
+    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
+        bsProps = _splitBsProps[0],
+        elementProps = _splitBsProps[1];
+
+    bsProps.bsClass = _bsClass || bsProps.bsClass;
+
+    if (toggle) {
+      children = _react2.default.createElement(
+        _PanelToggle2.default,
+        null,
+        children
+      );
+    }
+
+    return _react2.default.createElement(
+      Component,
+      (0, _extends3.default)({}, elementProps, {
+        className: (0, _classnames2.default)(className, (0, _bootstrapUtils.prefix)(bsProps, 'title'))
+      }),
+      children
+    );
+  };
+
+  return PanelTitle;
+}(_react2.default.Component);
+
+PanelTitle.propTypes = propTypes;
+PanelTitle.defaultProps = defaultProps;
+PanelTitle.contextTypes = contextTypes;
+
+exports.default = (0, _bootstrapUtils.bsClass)('panel', PanelTitle);
+module.exports = exports['default'];
+
+/***/ }),
+/* 489 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends2 = __webpack_require__(7);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = __webpack_require__(6);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(9);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(10);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(14);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _bootstrapUtils = __webpack_require__(15);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var contextTypes = {
+  $bs_panel: _propTypes2.default.shape({
+    bsClass: _propTypes2.default.string
+  })
+};
+
+var PanelFooter = function (_React$Component) {
+  (0, _inherits3.default)(PanelFooter, _React$Component);
+
+  function PanelFooter() {
+    (0, _classCallCheck3.default)(this, PanelFooter);
+    return (0, _possibleConstructorReturn3.default)(this, _React$Component.apply(this, arguments));
+  }
+
+  PanelFooter.prototype.render = function render() {
+    var _props = this.props,
+        children = _props.children,
+        className = _props.className;
+
+    var _ref = this.context.$bs_panel || {},
+        _bsClass = _ref.bsClass;
+
+    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(this.props),
+        bsProps = _splitBsProps[0],
+        elementProps = _splitBsProps[1];
+
+    bsProps.bsClass = _bsClass || bsProps.bsClass;
+
+    return _react2.default.createElement(
+      'div',
+      (0, _extends3.default)({}, elementProps, {
+        className: (0, _classnames2.default)(className, (0, _bootstrapUtils.prefix)(bsProps, 'footer'))
+      }),
+      children
+    );
+  };
+
+  return PanelFooter;
+}(_react2.default.Component);
+
+PanelFooter.contextTypes = contextTypes;
+
+exports.default = (0, _bootstrapUtils.bsClass)('panel', PanelFooter);
+module.exports = exports['default'];
+
+/***/ }),
+/* 490 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Grid = __webpack_require__(272);
+
+var _Grid2 = _interopRequireDefault(_Grid);
+
+var _Row = __webpack_require__(301);
+
+var _Row2 = _interopRequireDefault(_Row);
+
+var _Col = __webpack_require__(302);
+
+var _Col2 = _interopRequireDefault(_Col);
+
+var _FormControl = __webpack_require__(316);
+
+var _FormControl2 = _interopRequireDefault(_FormControl);
+
+var _MenuItem = __webpack_require__(320);
+
+var _MenuItem2 = _interopRequireDefault(_MenuItem);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Prey = function (_React$Component) {
+  _inherits(Prey, _React$Component);
+
+  function Prey(props) {
+    _classCallCheck(this, Prey);
+
+    var _this = _possibleConstructorReturn(this, (Prey.__proto__ || Object.getPrototypeOf(Prey)).call(this, props));
+
+    _this.state = {
+      preyList: ["Shimakaze", "Gearing", "Z-52", "Khabarovsk", "Grozovoi", "Yueyang", "Hakuryu", "Midway"]
+    };
+
+    _this.handleChangeShip = _this.handleChangeShip.bind(_this);
+    return _this;
+  }
+
+  _createClass(Prey, [{
+    key: 'handleChangeShip',
+    value: function handleChangeShip(e) {
+      this.setState({
+        selectedShip: e.target.value
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _Grid2.default,
+          null,
+          _react2.default.createElement(
+            _Row2.default,
+            null,
+            _react2.default.createElement(
+              _Col2.default,
+              { md: 2 },
+              _react2.default.createElement(
+                _FormControl2.default,
+                {
+                  componentClass: 'select',
+                  onChange: this.handleChangeShip,
+                  value: this.state.selectedShip
+                },
+                this.state.preyList.map(function (prey, idx) {
+                  return _react2.default.createElement(
+                    'option',
+                    { key: idx, value: prey },
+                    prey
+                  );
+                })
+              )
+            ),
+            _react2.default.createElement(
+              _Col2.default,
+              null,
+              'Your Prey\'s ship\'s Details'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Prey;
+}(_react2.default.Component);
+
+exports.default = Prey;
 
 /***/ })
 /******/ ]);

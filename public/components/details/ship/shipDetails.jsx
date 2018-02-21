@@ -28,7 +28,7 @@ export default class ShipDetails extends React.Component {
         <Grid>
           <Row>
             <Col>
-              Your ship's details
+              Your ship in greater detail
             </Col>
           </Row>
         </Grid>

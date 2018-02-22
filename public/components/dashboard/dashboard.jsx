@@ -30,7 +30,7 @@ export default class Dashboard extends React.Component {
 
           <Row>
             <Col className="text-center">
-              <h1><u>Moskva</u></h1>
+              <h1><u>{this.props.match.params.ship || "Select A Ship Above"}</u></h1>
             </Col>
           </Row>
 

@@ -1,8 +1,10 @@
 // Modules
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Autosuggest from 'react-bootstrap-autosuggest';
+
+import { shipList } from '../../sampleData/shipList.json';
 
 // Styles
 import Nav from 'react-bootstrap/lib/Nav';
@@ -21,21 +23,10 @@ export default muiThemeable()(class ParentNav extends React.Component {
 
     this.state = {
       dashButton: 'dashboard',
-      selectedShip: "Moskva",
-      shipList: [
-        "Shimakaze",
-        "Gearing",
-        "Z-52",
-        "Khabarovsk",
-        "Grozovoi",
-        "Yueyang",
-        "Hakuryu",
-        "Midway",
-        "Moskva"
-      ]
+      selectedShip: "",
+      shipList: shipList,
+      fireRedirect: false
     }
-
-    this.handleChangeShip = this.handleChangeShip.bind(this);
   }
 
   dashNav(page) {
@@ -44,10 +35,20 @@ export default muiThemeable()(class ParentNav extends React.Component {
     })
   }
 
-  handleChangeShip(e) {
-    this.setState({
-      selectedShip: e.target.value
-    });
+  handleChangeShip(shipEntry) {
+    var foundShip = this.state.shipList.find(
+      (ship) => {
+        if (shipEntry == ship) {
+          return shipEntry
+        }
+      });
+
+    if (foundShip) {
+      this.setState({
+        selectedShip: foundShip,
+        fireRedirect: true
+      });
+    }
   }
 
   render () {
@@ -56,7 +57,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <div>World of Warships Battle Guide (interm version 4)</div>
+            <div>World of Warships Battle Guide (version 0.0.5)</div>
           </Navbar.Brand>
         </Navbar.Header>
         <Navbar.Collapse>
@@ -65,6 +66,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
               datalist={this.state.shipList}
               placeholder="Select your ship"
               value={this.state.selectedShip}
+              onChange={(shipEntry) => this.handleChangeShip(shipEntry)}
             />
           </Navbar.Form>
           <Navbar.Form pullRight>
@@ -97,6 +99,9 @@ export default muiThemeable()(class ParentNav extends React.Component {
             </Link>
           </Navbar.Form>
         </Navbar.Collapse>
+        {this.state.fireRedirect && (
+          <Redirect to={`/${this.state.selectedShip}`}/>
+        )}
       </Navbar>
     )
   }

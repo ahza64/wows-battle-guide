@@ -11,22 +11,13 @@ import Main from './Main.jsx';
 export default class App extends React.Component {
   constructor (props) {
     super(props);
-
-    this.state = {
-      selectedShip: "Moskva"
-    }
   }
 
   render () {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <div>
-          <ParentNav
-            selectedShip={this.state.selectedShip}
-          />
-          <Main
-            selectedShip={this.state.selectedShip}
-          />
+          <Main/>
         </div>
       </MuiThemeProvider>
     )

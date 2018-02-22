@@ -39376,12 +39376,7 @@ var App = function (_React$Component) {
   function App(props) {
     _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-
-    _this.state = {
-      selectedShip: "Moskva"
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
   }
 
   _createClass(App, [{
@@ -39393,12 +39388,7 @@ var App = function (_React$Component) {
         _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement(_nav2.default, {
-            selectedShip: this.state.selectedShip
-          }),
-          _react2.default.createElement(_Main2.default, {
-            selectedShip: this.state.selectedShip
-          })
+          _react2.default.createElement(_Main2.default, null)
         )
       );
     }
@@ -44788,6 +44778,8 @@ var _reactBootstrapAutosuggest = __webpack_require__(386);
 
 var _reactBootstrapAutosuggest2 = _interopRequireDefault(_reactBootstrapAutosuggest);
 
+var _shipList = __webpack_require__(491);
+
 var _Nav = __webpack_require__(257);
 
 var _Nav2 = _interopRequireDefault(_Nav);
@@ -44838,11 +44830,10 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
 
     _this.state = {
       dashButton: 'dashboard',
-      selectedShip: "Moskva",
-      shipList: ["Shimakaze", "Gearing", "Z-52", "Khabarovsk", "Grozovoi", "Yueyang", "Hakuryu", "Midway", "Moskva"]
+      selectedShip: "",
+      shipList: _shipList.shipList,
+      fireRedirect: false
     };
-
-    _this.handleChangeShip = _this.handleChangeShip.bind(_this);
     return _this;
   }
 
@@ -44855,10 +44846,19 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
     }
   }, {
     key: 'handleChangeShip',
-    value: function handleChangeShip(e) {
-      this.setState({
-        selectedShip: e.target.value
+    value: function handleChangeShip(shipEntry) {
+      var foundShip = this.state.shipList.find(function (ship) {
+        if (shipEntry == ship) {
+          return shipEntry;
+        }
       });
+
+      if (foundShip) {
+        this.setState({
+          selectedShip: foundShip,
+          fireRedirect: true
+        });
+      }
     }
   }, {
     key: 'render',
@@ -44878,7 +44878,7 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             _react2.default.createElement(
               'div',
               null,
-              'World of Warships Battle Guide (interm version 4)'
+              'World of Warships Battle Guide (version 0.0.5)'
             )
           )
         ),
@@ -44891,7 +44891,10 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             _react2.default.createElement(_reactBootstrapAutosuggest2.default, {
               datalist: this.state.shipList,
               placeholder: 'Select your ship',
-              value: this.state.selectedShip
+              value: this.state.selectedShip,
+              onChange: function onChange(shipEntry) {
+                return _this2.handleChangeShip(shipEntry);
+              }
             })
           ),
           _react2.default.createElement(
@@ -44943,7 +44946,8 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
               )
             )
           )
-        )
+        ),
+        this.state.fireRedirect && _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' + this.state.selectedShip })
       );
     }
   }]);
@@ -48676,6 +48680,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(46);
 
+var _nav = __webpack_require__(256);
+
+var _nav2 = _interopRequireDefault(_nav);
+
 var _dashboard = __webpack_require__(297);
 
 var _dashboard2 = _interopRequireDefault(_dashboard);
@@ -48700,24 +48708,37 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Main = function (_React$Component) {
   _inherits(Main, _React$Component);
 
-  function Main() {
+  function Main(props) {
     _classCallCheck(this, Main);
 
-    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+
+    _this.state = {
+      selectedShip: ""
+    };
+    return _this;
   }
 
   _createClass(Main, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'main',
+        'div',
         null,
         _react2.default.createElement(
-          _reactRouterDom.Switch,
+          'main',
           null,
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _dashboard2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _details2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/information', component: _info2.default })
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _nav2.default }),
+          _react2.default.createElement(
+            _reactRouterDom.Switch,
+            null,
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _dashboard2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/:ship', component: _dashboard2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _details2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details/:ship', component: _details2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/information', component: _info2.default }),
+            _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' })
+          )
         )
       );
     }
@@ -48822,7 +48843,7 @@ var Dashboard = function (_React$Component) {
                 _react2.default.createElement(
                   'u',
                   null,
-                  'Moskva'
+                  this.props.match.params.ship || "Select A Ship Above"
                 )
               )
             )
@@ -72999,6 +73020,12 @@ var Prey = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Prey;
+
+/***/ }),
+/* 491 */
+/***/ (function(module, exports) {
+
+module.exports = {"shipList":["Shimakaze","Gearing","Z-52","Khabarovsk","Grozovoi","Yueyang","Hakuryu","Midway","Moskva"]}
 
 /***/ })
 /******/ ]);

@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { Link, Redirect } from 'react-router-dom';
-import Autosuggest from 'react-bootstrap-autosuggest';
+import {Typeahead} from 'react-bootstrap-typeahead';
 
 import { shipList } from '../../sampleData/shipList.json';
 
@@ -68,11 +68,10 @@ export default muiThemeable()(class ParentNav extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullLeft>
-            <Autosuggest
-              datalist={this.state.shipList}
-              placeholder="Select your ship"
-              value={this.state.selectedShip}
+            <Typeahead
               onChange={(shipEntry) => this.handleChangeShip(shipEntry)}
+              options={this.state.shipList}
+              placeholder="Select your ship"
             />
           </Navbar.Form>
           <Navbar.Form pullRight>

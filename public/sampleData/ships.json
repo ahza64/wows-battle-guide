@@ -1,0 +1,60 @@
+{
+  "ships": [
+    {
+      "name": "Moskva",
+      "mainGuns": {
+        "cal": 220,
+        "HE": {
+          "fireChance": 17,
+          "dmg": 3100
+        },
+        "AP": {
+          "dmg": 5800,
+          "penValues": {
+            "km5": 487,
+            "km10": 388,
+            "km15": 310,
+            "km20": 256,
+            "km25": null
+          }
+        }
+      },
+      "armor": {
+        "bow": 25,
+        "belt": 155,
+        "citadel": 25,
+        "upperHull": 50,
+        "deck": 50,
+        "structure": 16
+      }
+    },
+    {
+      "name": "Henri IV",
+      "mainGuns": {
+        "cal": 240,
+        "HE": {
+          "fireChance": 22,
+          "dmg": 3400
+        },
+        "AP": {
+          "dmg": 6200,
+          "penValues": {
+            "km5": 481,
+            "km10": 377,
+            "km15": 296,
+            "km20": 247,
+            "km25": null
+          }
+        }
+      },
+      "armor": {
+        "bow": 25,
+        "belt": 220,
+        "citadel": 25,
+        "upperHull": 50,
+        "deck": 50,
+        "structure": 16
+      }
+    }
+  ]
+}

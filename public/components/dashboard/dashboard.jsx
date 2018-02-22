@@ -42,7 +42,7 @@ export default class Dashboard extends React.Component {
           <br/>
           <Row>
             <Col className="text-center">
-              <DashboardTable/>
+              <DashboardTable match={this.props.match}/>
             </Col>
           </Row>
         </Grid>

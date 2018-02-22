@@ -60,11 +60,12 @@ export default muiThemeable()(class ParentNav extends React.Component {
   render () {
     var dashButton = this.state.dashButton;
     return (
-      <Navbar>
+      <Navbar fixedTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <div>World of Warships Battle Guide (version 0.0.5)</div>
+            <div>World of Warships Battle Guide (version 0.1.0)</div>
           </Navbar.Brand>
+          <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullLeft>
@@ -72,7 +73,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
               onChange={(shipEntry) => this.handleChangeShip(shipEntry)}
               options={this.state.shipList}
               placeholder="Select your ship"
-            />
+              />
           </Navbar.Form>
           <Navbar.Form pullRight>
             <Link to={`/dashboard/${this.state.selectedShip}`}>

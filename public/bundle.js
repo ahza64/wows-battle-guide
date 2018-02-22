@@ -44873,7 +44873,7 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
       var dashButton = this.state.dashButton;
       return _react2.default.createElement(
         _Navbar2.default,
-        null,
+        { fixedTop: true },
         _react2.default.createElement(
           _Navbar2.default.Header,
           null,
@@ -44883,9 +44883,10 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             _react2.default.createElement(
               'div',
               null,
-              'World of Warships Battle Guide (version 0.0.5)'
+              'World of Warships Battle Guide (version 0.1.0)'
             )
-          )
+          ),
+          _react2.default.createElement(_Navbar2.default.Toggle, null)
         ),
         _react2.default.createElement(
           _Navbar2.default.Collapse,
@@ -48731,7 +48732,7 @@ var Main = function (_React$Component) {
         null,
         _react2.default.createElement(
           'main',
-          null,
+          { style: { marginTop: "50px" } },
           _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _nav2.default }),
           _react2.default.createElement(
             _reactRouterDom.Switch,
@@ -48868,7 +48869,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               _Col2.default,
               { className: 'text-center' },
-              _react2.default.createElement(_dashboardTable2.default, null)
+              _react2.default.createElement(_dashboardTable2.default, { match: this.props.match })
             )
           )
         )
@@ -49564,6 +49565,10 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ships = __webpack_require__(703);
+
+var _ships2 = _interopRequireDefault(_ships);
+
 var _Panel = __webpack_require__(485);
 
 var _Panel2 = _interopRequireDefault(_Panel);
@@ -49598,12 +49603,40 @@ var DashboardTable = function (_React$Component) {
   function DashboardTable(props) {
     _classCallCheck(this, DashboardTable);
 
-    return _possibleConstructorReturn(this, (DashboardTable.__proto__ || Object.getPrototypeOf(DashboardTable)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (DashboardTable.__proto__ || Object.getPrototypeOf(DashboardTable)).call(this, props));
+
+    _this.state = {
+      selectedShip: { mainGuns: { AP: { penValues: { km15: "" } } } }
+    };
+    return _this;
   }
 
   _createClass(DashboardTable, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var shipParams = nextProps.match.params.ship;
+      var findShip = _ships2.default.ships.find(function (sh) {
+        if (shipParams == sh.name) {
+          return sh;
+        }
+      });
+
+      this.setState({
+        selectedShip: findShip
+      });
+    }
+  }, {
+    key: 'findAngle',
+    value: function findAngle(EnemyShip) {
+      var armor = EnemyShip.armor.belt;
+      var penVal = this.state.selectedShip.mainGuns.AP.penValues.km15;
+      return (Math.acos(armor / penVal) / (Math.PI / 180)).toFixed(1);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         null,
@@ -49673,7 +49706,7 @@ var DashboardTable = function (_React$Component) {
                       _react2.default.createElement(
                         _ListGroupItem2.default,
                         null,
-                        'Z-52'
+                        '-color cordinate for HE/IFHE pen bow/deck-Z-52'
                       ),
                       _react2.default.createElement(
                         _ListGroupItem2.default,
@@ -49708,36 +49741,16 @@ var DashboardTable = function (_React$Component) {
                     _react2.default.createElement(
                       _ListGroup2.default,
                       null,
-                      _react2.default.createElement(
-                        _ListGroupItem2.default,
-                        null,
-                        '-color cordinate for HE/IFHE pen bow/deck-Zao'
-                      ),
-                      _react2.default.createElement(
-                        _ListGroupItem2.default,
-                        null,
-                        'Des Moines'
-                      ),
-                      _react2.default.createElement(
-                        _ListGroupItem2.default,
-                        null,
-                        'Hindenburg'
-                      ),
-                      _react2.default.createElement(
-                        _ListGroupItem2.default,
-                        null,
-                        'Moskva'
-                      ),
-                      _react2.default.createElement(
-                        _ListGroupItem2.default,
-                        null,
-                        'Minotaur'
-                      ),
-                      _react2.default.createElement(
-                        _ListGroupItem2.default,
-                        null,
-                        'Henri IV'
-                      )
+                      _ships2.default.ships.map(function (EnemyShip, idx) {
+                        return _react2.default.createElement(
+                          _ListGroupItem2.default,
+                          { key: idx },
+                          '15km:',
+                          _this2.findAngle(EnemyShip),
+                          '\u02DA-',
+                          EnemyShip.name
+                        );
+                      })
                     )
                   ),
                   _react2.default.createElement(
@@ -55248,7 +55261,7 @@ exports.default = Prey;
 /* 491 */
 /***/ (function(module, exports) {
 
-module.exports = {"shipList":["Shimakaze","Gearing","Z-52","Khabarovsk","Grozovoi","Yueyang","Hakuryu","Midway","Moskva"]}
+module.exports = {"shipList":["Shimakaze","Gearing","Z-52","Khabarovsk","Grozovoi","Yueyang","Hakuryu","Midway","Moskva","Zao","Des Monies","Hindenburg","Henri IV"]}
 
 /***/ }),
 /* 492 */
@@ -65808,6 +65821,12 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.object.isRequired), _propTypes2.default.arrayOf(_propTypes2.default.string.isRequired)]);
+
+/***/ }),
+/* 703 */
+/***/ (function(module, exports) {
+
+module.exports = {"ships":[{"name":"Moskva","mainGuns":{"cal":220,"HE":{"fireChance":17,"dmg":3100},"AP":{"dmg":5800,"penValues":{"km5":487,"km10":388,"km15":310,"km20":256,"km25":null}}},"armor":{"bow":25,"belt":155,"citadel":25,"upperHull":50,"deck":50,"structure":16}},{"name":"Henri IV","mainGuns":{"cal":240,"HE":{"fireChance":22,"dmg":3400},"AP":{"dmg":6200,"penValues":{"km5":481,"km10":377,"km15":296,"km20":247,"km25":null}}},"armor":{"bow":25,"belt":220,"citadel":25,"upperHull":50,"deck":50,"structure":16}}]}
 
 /***/ })
 /******/ ]);

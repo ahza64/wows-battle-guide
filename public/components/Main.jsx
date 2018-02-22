@@ -19,7 +19,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <div>
-        <main>
+        <main style={{marginTop: "50px"}}>
           <Route path='/' component={ParentNav}/>
           <Switch>
             <Route exact path='/dashboard' component={Dashboard}/>

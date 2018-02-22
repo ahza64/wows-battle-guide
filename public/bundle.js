@@ -44838,6 +44838,13 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
   }
 
   _createClass(ParentNav, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.setState({
+        fireRedirect: false
+      });
+    }
+  }, {
     key: 'dashNav',
     value: function dashNav(page) {
       this.setState({
@@ -44902,7 +44909,7 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             { pullRight: true },
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: '/' },
+              { to: '/dashboard/' + this.state.selectedShip },
               _react2.default.createElement(
                 _Button2.default,
                 {
@@ -44917,7 +44924,7 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             ),
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: '/details' },
+              { to: '/details/' + this.state.selectedShip },
               _react2.default.createElement(
                 _Button2.default,
                 {
@@ -44947,7 +44954,7 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             )
           )
         ),
-        this.state.fireRedirect && _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' + this.state.selectedShip })
+        this.state.fireRedirect && _react2.default.createElement(_reactRouterDom.Redirect, { to: '/dashboard/' + this.state.selectedShip })
       );
     }
   }]);
@@ -48732,12 +48739,12 @@ var Main = function (_React$Component) {
           _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _dashboard2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/:ship', component: _dashboard2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/dashboard', component: _dashboard2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/dashboard/:ship', component: _dashboard2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _details2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details/:ship', component: _details2.default }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/information', component: _info2.default }),
-            _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' })
+            _react2.default.createElement(_reactRouterDom.Redirect, { to: '/dashboard' })
           )
         )
       );

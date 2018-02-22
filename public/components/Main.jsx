@@ -22,12 +22,12 @@ export default class Main extends React.Component {
         <main>
           <Route path='/' component={ParentNav}/>
           <Switch>
-            <Route exact path='/' component={Dashboard}/>
-            <Route exact path='/:ship' component={Dashboard}/>
+            <Route exact path='/dashboard' component={Dashboard}/>
+            <Route exact path='/dashboard/:ship' component={Dashboard}/>
             <Route exact path='/details' component={Details}/>
             <Route exact path='/details/:ship' component={Details}/>
             <Route exact path='/information' component={Information}/>
-            <Redirect to="/" />
+            <Redirect to="/dashboard" />
           </Switch>
         </main>
       </div>

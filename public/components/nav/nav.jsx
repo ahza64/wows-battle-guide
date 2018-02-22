@@ -29,6 +29,12 @@ export default muiThemeable()(class ParentNav extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.setState({
+      fireRedirect: false
+    })
+  }
+
   dashNav(page) {
     this.setState({
       dashButton: page
@@ -70,7 +76,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
             />
           </Navbar.Form>
           <Navbar.Form pullRight>
-            <Link to='/'>
+            <Link to={`/dashboard/${this.state.selectedShip}`}>
               <Button
                 active={(dashButton === 'dashboard')}
                 type="button"
@@ -79,7 +85,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
                 Dashboard
               </Button>
             </Link>
-            <Link to='/details'>
+            <Link to={`/details/${this.state.selectedShip}`}>
               <Button
                 active={(dashButton === 'details')}
                 type="button"
@@ -100,7 +106,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
           </Navbar.Form>
         </Navbar.Collapse>
         {this.state.fireRedirect && (
-          <Redirect to={`/${this.state.selectedShip}`}/>
+          <Redirect to={`/dashboard/${this.state.selectedShip}`}/>
         )}
       </Navbar>
     )

@@ -90,16 +90,14 @@ export default class DashboardTable extends React.Component {
                   </td>
                   <td>
                     <ListGroup>
-                      <ListGroupItem key={1.1}>5,10,15km attack ::enemy ship:: defense</ListGroupItem>
                       {
                         ships.ships.map((EnemyShip, idx) => {
                           return (
-                            <ListGroupItem key={idx}>
-                              {this.findAttackAngle(EnemyShip, 5)}˚
+                            <ListGroupItem key={idx} header={EnemyShip.name}>
+                              atk:{this.findAttackAngle(EnemyShip, 5)}˚
                               _{this.findAttackAngle(EnemyShip, 10)}˚
                               _{this.findAttackAngle(EnemyShip, 15)}˚
-                              ::{EnemyShip.name}::
-                              {this.findDefendAngle(EnemyShip, 5)}˚
+                            ::  def:{this.findDefendAngle(EnemyShip, 5)}˚
                               _{this.findDefendAngle(EnemyShip, 10)}˚
                               _{this.findDefendAngle(EnemyShip, 15)}˚
                             </ListGroupItem>

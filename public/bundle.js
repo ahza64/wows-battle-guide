@@ -49822,23 +49822,17 @@ var DashboardTable = function (_React$Component) {
                     _react2.default.createElement(
                       _ListGroup2.default,
                       null,
-                      _react2.default.createElement(
-                        _ListGroupItem2.default,
-                        { key: 1.1 },
-                        '5,10,15km attack ::enemy ship:: defense'
-                      ),
                       _ships2.default.ships.map(function (EnemyShip, idx) {
                         return _react2.default.createElement(
                           _ListGroupItem2.default,
-                          { key: idx },
+                          { key: idx, header: EnemyShip.name },
+                          'atk:',
                           _this2.findAttackAngle(EnemyShip, 5),
                           '\u02DA _',
                           _this2.findAttackAngle(EnemyShip, 10),
                           '\u02DA _',
                           _this2.findAttackAngle(EnemyShip, 15),
-                          '\u02DA ::',
-                          EnemyShip.name,
-                          '::',
+                          '\u02DA ::  def:',
                           _this2.findDefendAngle(EnemyShip, 5),
                           '\u02DA _',
                           _this2.findDefendAngle(EnemyShip, 10),

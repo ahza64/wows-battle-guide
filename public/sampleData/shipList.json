@@ -1,5 +1,13 @@
 {
   "shipList": [
+    "Zao",
+    "Des Moines",
+    "Moskva",
+    "Hindenburg",
+    "Minotaur",
+    "Henri IV"
+  ],
+  "shipListEveryone": [
     "Shimakaze",
     "Gearing",
     "Z-52",

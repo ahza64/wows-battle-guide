@@ -1,7 +1,67 @@
 {
   "ships": [
     {
+      "name": "Zao",
+      "quip": "Is it hot in here?",
+      "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PJSC034.png",
+      "mainGuns": {
+        "cal": 203,
+        "HE": {
+          "fireChance": 19,
+          "dmg": 3400
+        },
+        "AP": {
+          "dmg": 5400,
+          "penValues": {
+            "km5": 396,
+            "km10": 295,
+            "km15": 220,
+            "kmMax": 206
+          }
+        }
+      },
+      "armor": {
+        "bow": 25,
+        "belt": 125,
+        "citadel": 25,
+        "upperHull": 30,
+        "deck": 30,
+        "structure": 16
+      }
+    },
+    {
+      "name": "Des Moines",
+      "quip": "Close range death",
+      "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PASC020.png",
+      "mainGuns": {
+        "cal": 203,
+        "HE": {
+          "fireChance": 14,
+          "dmg": 2800
+        },
+        "AP": {
+          "dmg": 5000,
+          "penValues": {
+            "km5": 364,
+            "km10": 261,
+            "km15": 189,
+            "kmMax": 180
+          }
+        }
+      },
+      "armor": {
+        "bow": 27,
+        "belt": 152,
+        "citadel": 0,
+        "upperHull": 27,
+        "deck": 30,
+        "structure": 16
+      }
+    },
+    {
       "name": "Moskva",
+      "quip": "Come schedule your beating",
+      "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PRSC110.png",
       "mainGuns": {
         "cal": 220,
         "HE": {
@@ -14,8 +74,7 @@
             "km5": 487,
             "km10": 388,
             "km15": 310,
-            "km20": 256,
-            "km25": null
+            "kmMax": 256
           }
         }
       },
@@ -29,7 +88,67 @@
       }
     },
     {
+      "name": "Hindenburg",
+      "quip": "Bringing a gun to your knife fight",
+      "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PGSC110.png",
+      "mainGuns": {
+        "cal": 203,
+        "HE": {
+          "fireChance": 13,
+          "dmg": 2500
+        },
+        "AP": {
+          "dmg": 5900,
+          "penValues": {
+            "km5": 329,
+            "km10": 236,
+            "km15": 169,
+            "kmMax": 143
+          }
+        }
+      },
+      "armor": {
+        "bow": 27,
+        "belt": 110,
+        "citadel": 45,
+        "upperHull": 30,
+        "deck": 30,
+        "structure": 16
+      }
+    },
+    {
+      "name": "Minotaur",
+      "quip": "Ah hoy hoy",
+      "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PBSC110.png",
+      "mainGuns": {
+        "cal": 152,
+        "HE": {
+          "fireChance": 0,
+          "dmg": 0
+        },
+        "AP": {
+          "dmg": 3200,
+          "penValues": {
+            "km5": 212,
+            "km10": 132,
+            "km15": 85,
+            "kmMax": 80
+          }
+        }
+      },
+      "armor": {
+        "bow": 16,
+        "belt": 100,
+        "citadel": 25,
+        "upperHull": 16,
+        "deck": 16,
+        "structure": 13
+      }
+    },
+    {
       "name": "Henri IV",
+      "quip": "Ferrari Baguette",
+      "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PFSC110.png",
       "mainGuns": {
         "cal": 240,
         "HE": {
@@ -42,17 +161,16 @@
             "km5": 481,
             "km10": 377,
             "km15": 296,
-            "km20": 247,
-            "km25": null
+            "kmMax": 247
           }
         }
       },
       "armor": {
         "bow": 25,
-        "belt": 220,
-        "citadel": 25,
-        "upperHull": 50,
-        "deck": 50,
+        "belt": 159,
+        "citadel": 45,
+        "upperHull": 30,
+        "deck": 30,
         "structure": 16
       }
     }

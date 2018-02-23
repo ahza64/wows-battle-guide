@@ -44883,7 +44883,7 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             _react2.default.createElement(
               'div',
               null,
-              'World of Warships Battle Guide (version 0.1.0)'
+              'World of Warships Battle Guide (version 0.0.6)'
             )
           ),
           _react2.default.createElement(_Navbar2.default.Toggle, null)
@@ -48775,6 +48775,10 @@ var _dashboardTable = __webpack_require__(303);
 
 var _dashboardTable2 = _interopRequireDefault(_dashboardTable);
 
+var _ships = __webpack_require__(703);
+
+var _ships2 = _interopRequireDefault(_ships);
+
 var _Image = __webpack_require__(298);
 
 var _Image2 = _interopRequireDefault(_Image);
@@ -48805,10 +48809,59 @@ var Dashboard = function (_React$Component) {
   function Dashboard(props) {
     _classCallCheck(this, Dashboard);
 
-    return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+
+    _this.state = {
+      selectedShip: {
+        img: "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/small/PRSC999.png",
+        mainGuns: {
+          AP: {
+            penValues: {
+              km15: 100
+            }
+          }
+        },
+        armor: {
+          belt: 0
+        }
+      }
+    };
+    return _this;
   }
 
   _createClass(Dashboard, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      if (this.props.match.params.ship) {
+        var shipParams = this.props.match.params.ship;
+        var findShip = _ships2.default.ships.find(function (sh) {
+          if (shipParams == sh.name) {
+            return sh;
+          }
+        });
+        if (findShip) {
+          this.setState({
+            selectedShip: findShip
+          });
+        }
+      }
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var shipParams = nextProps.match.params.ship;
+      var findShip = _ships2.default.ships.find(function (sh) {
+        if (shipParams == sh.name) {
+          return sh;
+        }
+      });
+      if (findShip) {
+        this.setState({
+          selectedShip: findShip
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -48828,7 +48881,11 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               _Col2.default,
               { xs: 6, md: 4 },
-              _react2.default.createElement(_Image2.default, { src: '../../images/PRSC110.png', rounded: true, responsive: true })
+              _react2.default.createElement(_Image2.default, {
+                rounded: true,
+                responsive: true,
+                src: this.state.selectedShip.img
+              })
             ),
             _react2.default.createElement(
               _Col2.default,
@@ -48848,7 +48905,7 @@ var Dashboard = function (_React$Component) {
                 _react2.default.createElement(
                   'u',
                   null,
-                  this.props.match.params.ship || "Select A Ship Above"
+                  this.state.selectedShip.name || "Select A Ship Above"
                 )
               )
             )
@@ -48859,7 +48916,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               _Col2.default,
               { className: 'text-center' },
-              '"Come schedule your beating"'
+              this.state.selectedShip.quip
             )
           ),
           _react2.default.createElement('br', null),
@@ -48869,7 +48926,10 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               _Col2.default,
               { className: 'text-center' },
-              _react2.default.createElement(_dashboardTable2.default, { match: this.props.match })
+              _react2.default.createElement(_dashboardTable2.default, {
+                match: this.props.match,
+                selectedShip: this.state.selectedShip
+              })
             )
           )
         )
@@ -49603,15 +49663,17 @@ var DashboardTable = function (_React$Component) {
   function DashboardTable(props) {
     _classCallCheck(this, DashboardTable);
 
-    var _this = _possibleConstructorReturn(this, (DashboardTable.__proto__ || Object.getPrototypeOf(DashboardTable)).call(this, props));
-
-    _this.state = {
-      selectedShip: { mainGuns: { AP: { penValues: { km15: "" } } } }
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (DashboardTable.__proto__ || Object.getPrototypeOf(DashboardTable)).call(this, props));
   }
 
   _createClass(DashboardTable, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.setState({
+        selectedShip: this.props.selectedShip
+      });
+    }
+  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       var shipParams = nextProps.match.params.ship;
@@ -49626,11 +49688,30 @@ var DashboardTable = function (_React$Component) {
       });
     }
   }, {
-    key: 'findAngle',
-    value: function findAngle(EnemyShip) {
+    key: 'findAttackAngle',
+    value: function findAttackAngle(EnemyShip, range) {
+      var kmRange = 'km' + range;
       var armor = EnemyShip.armor.belt;
-      var penVal = this.state.selectedShip.mainGuns.AP.penValues.km15;
-      return (Math.acos(armor / penVal) / (Math.PI / 180)).toFixed(1);
+      var penVal = this.state.selectedShip.mainGuns.AP.penValues[kmRange];
+      var angle = (90 - Math.acos(armor / penVal) / (Math.PI / 180)).toFixed(1);
+      if (angle == "NaN") {
+        return "0";
+      } else {
+        return angle;
+      }
+    }
+  }, {
+    key: 'findDefendAngle',
+    value: function findDefendAngle(EnemyShip, range) {
+      var kmRange = 'km' + range;
+      var armor = this.state.selectedShip.armor.belt;
+      var penVal = EnemyShip.mainGuns.AP.penValues[kmRange];
+      var angle = (90 - Math.acos(armor / penVal) / (Math.PI / 180)).toFixed(1);
+      if (angle == "NaN") {
+        return "0";
+      } else {
+        return angle;
+      }
     }
   }, {
     key: 'render',
@@ -49741,14 +49822,29 @@ var DashboardTable = function (_React$Component) {
                     _react2.default.createElement(
                       _ListGroup2.default,
                       null,
+                      _react2.default.createElement(
+                        _ListGroupItem2.default,
+                        { key: 1.1 },
+                        '5,10,15km attack ::enemy ship:: defense'
+                      ),
                       _ships2.default.ships.map(function (EnemyShip, idx) {
                         return _react2.default.createElement(
                           _ListGroupItem2.default,
                           { key: idx },
-                          '15km:',
-                          _this2.findAngle(EnemyShip),
-                          '\u02DA-',
-                          EnemyShip.name
+                          _this2.findAttackAngle(EnemyShip, 5),
+                          '\u02DA _',
+                          _this2.findAttackAngle(EnemyShip, 10),
+                          '\u02DA _',
+                          _this2.findAttackAngle(EnemyShip, 15),
+                          '\u02DA ::',
+                          EnemyShip.name,
+                          '::',
+                          _this2.findDefendAngle(EnemyShip, 5),
+                          '\u02DA _',
+                          _this2.findDefendAngle(EnemyShip, 10),
+                          '\u02DA _',
+                          _this2.findDefendAngle(EnemyShip, 15),
+                          '\u02DA'
                         );
                       })
                     )
@@ -55261,7 +55357,7 @@ exports.default = Prey;
 /* 491 */
 /***/ (function(module, exports) {
 
-module.exports = {"shipList":["Shimakaze","Gearing","Z-52","Khabarovsk","Grozovoi","Yueyang","Hakuryu","Midway","Moskva","Zao","Des Monies","Hindenburg","Henri IV"]}
+module.exports = {"shipList":["Zao","Des Moines","Moskva","Hindenburg","Minotaur","Henri IV"],"shipListEveryone":["Shimakaze","Gearing","Z-52","Khabarovsk","Grozovoi","Yueyang","Hakuryu","Midway","Moskva","Zao","Des Monies","Hindenburg","Henri IV"]}
 
 /***/ }),
 /* 492 */
@@ -65826,7 +65922,7 @@ exports.default = _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_pr
 /* 703 */
 /***/ (function(module, exports) {
 
-module.exports = {"ships":[{"name":"Moskva","mainGuns":{"cal":220,"HE":{"fireChance":17,"dmg":3100},"AP":{"dmg":5800,"penValues":{"km5":487,"km10":388,"km15":310,"km20":256,"km25":null}}},"armor":{"bow":25,"belt":155,"citadel":25,"upperHull":50,"deck":50,"structure":16}},{"name":"Henri IV","mainGuns":{"cal":240,"HE":{"fireChance":22,"dmg":3400},"AP":{"dmg":6200,"penValues":{"km5":481,"km10":377,"km15":296,"km20":247,"km25":null}}},"armor":{"bow":25,"belt":220,"citadel":25,"upperHull":50,"deck":50,"structure":16}}]}
+module.exports = {"ships":[{"name":"Zao","quip":"Is it hot in here?","img":"https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PJSC034.png","mainGuns":{"cal":203,"HE":{"fireChance":19,"dmg":3400},"AP":{"dmg":5400,"penValues":{"km5":396,"km10":295,"km15":220,"kmMax":206}}},"armor":{"bow":25,"belt":125,"citadel":25,"upperHull":30,"deck":30,"structure":16}},{"name":"Des Moines","quip":"Close range death","img":"https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PASC020.png","mainGuns":{"cal":203,"HE":{"fireChance":14,"dmg":2800},"AP":{"dmg":5000,"penValues":{"km5":364,"km10":261,"km15":189,"kmMax":180}}},"armor":{"bow":27,"belt":152,"citadel":0,"upperHull":27,"deck":30,"structure":16}},{"name":"Moskva","quip":"Come schedule your beating","img":"https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PRSC110.png","mainGuns":{"cal":220,"HE":{"fireChance":17,"dmg":3100},"AP":{"dmg":5800,"penValues":{"km5":487,"km10":388,"km15":310,"kmMax":256}}},"armor":{"bow":25,"belt":155,"citadel":25,"upperHull":50,"deck":50,"structure":16}},{"name":"Hindenburg","quip":"Bringing a gun to your knife fight","img":"https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PGSC110.png","mainGuns":{"cal":203,"HE":{"fireChance":13,"dmg":2500},"AP":{"dmg":5900,"penValues":{"km5":329,"km10":236,"km15":169,"kmMax":143}}},"armor":{"bow":27,"belt":110,"citadel":45,"upperHull":30,"deck":30,"structure":16}},{"name":"Minotaur","quip":"Ah hoy hoy","img":"https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PBSC110.png","mainGuns":{"cal":152,"HE":{"fireChance":0,"dmg":0},"AP":{"dmg":3200,"penValues":{"km5":212,"km10":132,"km15":85,"kmMax":80}}},"armor":{"bow":16,"belt":100,"citadel":25,"upperHull":16,"deck":16,"structure":13}},{"name":"Henri IV","quip":"Ferrari Baguette","img":"https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PFSC110.png","mainGuns":{"cal":240,"HE":{"fireChance":22,"dmg":3400},"AP":{"dmg":6200,"penValues":{"km5":481,"km10":377,"km15":296,"kmMax":247}}},"armor":{"bow":25,"belt":159,"citadel":45,"upperHull":30,"deck":30,"structure":16}}]}
 
 /***/ })
 /******/ ]);

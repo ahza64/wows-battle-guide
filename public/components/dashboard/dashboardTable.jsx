@@ -12,9 +12,12 @@ export default class DashboardTable extends React.Component {
   constructor (props) {
     super(props);
 
-    this.state = {
-      selectedShip: {mainGuns: {AP: {penValues: {km15: ""}}}}
-    }
+  }
+
+  componentWillMount() {
+    this.setState({
+      selectedShip: this.props.selectedShip
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,10 +34,28 @@ export default class DashboardTable extends React.Component {
     });
   }
 
-  findAngle(EnemyShip){
+  findAttackAngle(EnemyShip, range){
+    var kmRange = `km${range}`
     var armor = EnemyShip.armor.belt;
-    var penVal = this.state.selectedShip.mainGuns.AP.penValues.km15;
-    return ((Math.acos(armor/penVal))/(Math.PI / 180)).toFixed(1)
+    var penVal = this.state.selectedShip.mainGuns.AP.penValues[kmRange];
+    var angle = (90-(Math.acos(armor/penVal))/(Math.PI / 180)).toFixed(1);
+    if (angle == "NaN") {
+      return "0"
+    }else{
+      return angle
+    }
+  }
+
+  findDefendAngle(EnemyShip, range) {
+    var kmRange = `km${range}`
+    var armor = this.state.selectedShip.armor.belt;
+    var penVal = EnemyShip.mainGuns.AP.penValues[kmRange];
+    var angle = (90-(Math.acos(armor/penVal))/(Math.PI / 180)).toFixed(1);
+    if (angle == "NaN") {
+      return "0"
+    }else{
+      return angle
+    }
   }
 
   render () {
@@ -69,10 +90,19 @@ export default class DashboardTable extends React.Component {
                   </td>
                   <td>
                     <ListGroup>
+                      <ListGroupItem key={1.1}>5,10,15km attack ::enemy ship:: defense</ListGroupItem>
                       {
                         ships.ships.map((EnemyShip, idx) => {
                           return (
-                            <ListGroupItem key={idx}>15km:{this.findAngle(EnemyShip)}˚-{EnemyShip.name}</ListGroupItem>
+                            <ListGroupItem key={idx}>
+                              {this.findAttackAngle(EnemyShip, 5)}˚
+                              _{this.findAttackAngle(EnemyShip, 10)}˚
+                              _{this.findAttackAngle(EnemyShip, 15)}˚
+                              ::{EnemyShip.name}::
+                              {this.findDefendAngle(EnemyShip, 5)}˚
+                              _{this.findDefendAngle(EnemyShip, 10)}˚
+                              _{this.findDefendAngle(EnemyShip, 15)}˚
+                            </ListGroupItem>
                           )
                         })
                       }

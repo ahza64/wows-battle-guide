@@ -18394,7 +18394,7 @@ exports.default = (0, _muiThemeable2.default)()(function (_React$Component) {
             _react2.default.createElement(
               'div',
               null,
-              'World of Warships Battle Guide (version 0.0.6)'
+              'World of Warships Battle Guide (version 0.1.0)'
             )
           ),
           _react2.default.createElement(_Navbar2.default.Toggle, null)

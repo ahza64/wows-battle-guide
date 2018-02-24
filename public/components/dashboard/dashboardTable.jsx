@@ -7,6 +7,10 @@ import Col from 'react-bootstrap/lib/Col';
 import Table from 'react-bootstrap/lib/Table';
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Popover from 'react-bootstrap/lib/Popover';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
+import Button from 'react-bootstrap/lib/Button';
 
 export default class DashboardTable extends React.Component {
   constructor (props) {
@@ -58,12 +62,88 @@ export default class DashboardTable extends React.Component {
     }
   }
 
+  getDefColor(EnemyShip) {
+    var ship = this.state.selectedShip;
+    var hePen = EnemyShip.mainGuns.cal/6;
+    if ((hePen > ship.armor.belt) && (EnemyShip.armor.layered == false)) {
+      return 'red'
+    }else if (hePen > ship.armor.structure) {
+      if (hePen > ship.armor.bow) {
+        if ((hePen > ship.armor.deck) && (hePen > ship.armor.upperHull)) {
+          return 'orange'
+        }
+        return 'yellow'
+      }
+      return 'white'
+    }else{
+      return 'black'
+    }
+  }
+
+  getColor(EnemyShip) {
+    var hePen = this.state.selectedShip.mainGuns.cal/6;
+    if ((hePen > EnemyShip.armor.belt) && (EnemyShip.armor.layered == false)) {
+      return 'red'
+    }else if (hePen > EnemyShip.armor.structure) {
+      if (hePen > EnemyShip.armor.bow) {
+        if ((hePen > EnemyShip.armor.deck) && (hePen > EnemyShip.armor.upperHull)) {
+          return 'orange'
+        }
+        return 'yellow'
+      }
+      return 'white'
+    }else{
+      return 'black'
+    }
+  }
+
+  overmatchColor(EnemyShip, direction) {
+    var yourOM = this.state.selectedShip.mainGuns.cal/14.3;
+    var enemyOM = EnemyShip.mainGuns.cal/14.3;
+    if (direction === 'a') {
+      if (yourOM > EnemyShip.armor.bow) {
+        return "red"
+      }
+      return "white"
+    }else if (direction === 'd') {
+      if (enemyOM > this.state.selectedShip.armor.bow) {
+        return "red"
+      }
+      return "white"
+    }
+  }
+
   render () {
+    const color = 'blue';
+    const popoverHoverFocus = (
+  <Popover id="popover-trigger-focus" title="What do the numbers and colors mean?">
+      NUMBERS: Represent the angle your main battery AP can penetrate that
+      opponent's belt armor at ranges: 5km, 10km, 15km and maxkm, for both attacking and
+      defending.
+      <br/>
+      COLORS: Represent how much of their ship can be pen by your HE:
+      black:nothing, white:super, yellow:super/bow, orange:super/bow/deck/upper,
+      red:can cit, for both attacking and defending.
+      <br/>
+      OVERMATCH BOW: are visible by the color both to and from:
+      red:can, white:cannot
+  </Popover>
+);
     return (
       <div>
         <Panel bsStyle="primary">
           <Panel.Heading>
-            <Panel.Title componentClass="h3">The Bad Boys You'll be Fighting</Panel.Title>
+            <OverlayTrigger
+              trigger='focus'
+              placement="bottom"
+              overlay={popoverHoverFocus}
+            >
+              <Panel.Title componentClass="h3">
+                <Button>
+                The Bad Boys You'll be Fighting
+              </Button>
+              </Panel.Title>
+            </OverlayTrigger>
           </Panel.Heading>
           <Panel.Body>
             <Table>
@@ -81,8 +161,8 @@ export default class DashboardTable extends React.Component {
                       <ListGroupItem>-angles they pen you-Shimakaze-angles you pen them-</ListGroupItem>
                       <ListGroupItem>-a note about why in catagory-Gearing</ListGroupItem>
                       <ListGroupItem>-color cordinate for HE/IFHE pen bow/deck-Z-52</ListGroupItem>
-                      <ListGroupItem>Khabarovsk</ListGroupItem>
-                      <ListGroupItem>Grozovoi</ListGroupItem>
+                      <ListGroupItem>-give cit over pen distance (if you can)-Khabarovsk</ListGroupItem>
+                      <ListGroupItem>-overmatch bow and vice versa-Grozovoi</ListGroupItem>
                       <ListGroupItem>Yueyang</ListGroupItem>
                       <ListGroupItem>Hakuryu</ListGroupItem>
                       <ListGroupItem>Midway</ListGroupItem>
@@ -93,13 +173,61 @@ export default class DashboardTable extends React.Component {
                       {
                         ships.ships.map((EnemyShip, idx) => {
                           return (
-                            <ListGroupItem key={idx} header={EnemyShip.name}>
-                              atk:{this.findAttackAngle(EnemyShip, 5)}˚
-                              _{this.findAttackAngle(EnemyShip, 10)}˚
-                              _{this.findAttackAngle(EnemyShip, 15)}˚
-                            ::  def:{this.findDefendAngle(EnemyShip, 5)}˚
-                              _{this.findDefendAngle(EnemyShip, 10)}˚
-                              _{this.findDefendAngle(EnemyShip, 15)}˚
+                            <ListGroupItem
+                              key={idx}
+                              header={<h3>
+                                        <OverlayTrigger
+                                          placement="left"
+                                          overlay={
+                                            <Tooltip id="tooltip">
+                                              can you HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
+                                              red:can cit
+                                            </Tooltip>
+                                        }>
+                                          <u style={{color: this.getColor(EnemyShip)}}>
+                                            {EnemyShip.name}
+                                          </u>
+                                        </OverlayTrigger>{'  '}
+                                        <OverlayTrigger
+                                          placement="right"
+                                          overlay={
+                                            <Tooltip id="tooltip">
+                                              can enemy HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
+                                              red:can cit
+                                            </Tooltip>
+                                        }>
+                                          <u style={{color: this.getDefColor(EnemyShip)}}>
+                                            {EnemyShip.tier}
+                                          </u>
+                                        </OverlayTrigger>
+                                      </h3>
+                              }>
+                              <OverlayTrigger
+                                placement="left"
+                                overlay={
+                                  <Tooltip id="tooltip">
+                                    you overmatch enemy bow?<br/>white:no, red:yes
+                                  </Tooltip>
+                              }>
+                                <span style={{color: this.overmatchColor(EnemyShip, "a")}}>
+                                  <span>atk:{this.findAttackAngle(EnemyShip, 5)}˚</span>
+                                  <span>{' '}{this.findAttackAngle(EnemyShip, 10)}˚</span>
+                                  <span>{' '}{this.findAttackAngle(EnemyShip, 15)}˚</span>
+                                </span>
+                              </OverlayTrigger>
+                              <OverlayTrigger
+                                placement="right"
+                                overlay={
+                                  <Tooltip id="tooltip">
+                                    enemy overmatch your bow?<br/>white:no, red:yes
+                                  </Tooltip>
+                              }>
+                                <span style={{color: this.overmatchColor(EnemyShip, "d")}}>
+                                  <span>{'    '}def:{this.findDefendAngle(EnemyShip, 5)}˚</span>
+                                  <span>{' '}{this.findDefendAngle(EnemyShip, 10)}˚</span>
+                                  <span>{' '}{this.findDefendAngle(EnemyShip, 15)}˚</span>
+                                </span>
+                              </OverlayTrigger>
                             </ListGroupItem>
                           )
                         })

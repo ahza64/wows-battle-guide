@@ -2,6 +2,7 @@
   "ships": [
     {
       "name": "Zao",
+      "tier": "X",
       "quip": "Is it hot in here?",
       "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PJSC034.png",
       "mainGuns": {
@@ -31,6 +32,7 @@
     },
     {
       "name": "Des Moines",
+      "tier": "X",
       "quip": "Close range death",
       "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PASC020.png",
       "mainGuns": {
@@ -60,6 +62,7 @@
     },
     {
       "name": "Moskva",
+      "tier": "X",
       "quip": "Come schedule your beating",
       "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PRSC110.png",
       "mainGuns": {
@@ -89,6 +92,7 @@
     },
     {
       "name": "Hindenburg",
+      "tier": "X",
       "quip": "Bringing a gun to your knife fight",
       "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PGSC110.png",
       "mainGuns": {
@@ -118,6 +122,7 @@
     },
     {
       "name": "Minotaur",
+      "tier": "X",
       "quip": "Ah hoy hoy",
       "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PBSC110.png",
       "mainGuns": {
@@ -142,11 +147,13 @@
         "citadel": 25,
         "upperHull": 16,
         "deck": 16,
-        "structure": 13
+        "structure": 13,
+        "layered": false
       }
     },
     {
       "name": "Henri IV",
+      "tier": "X",
       "quip": "Ferrari Baguette",
       "img": "https://glossary-eu-static.gcdn.co/icons/wows/current/vehicle/medium/PFSC110.png",
       "mainGuns": {

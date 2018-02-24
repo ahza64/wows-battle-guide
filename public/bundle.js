@@ -63539,9 +63539,9 @@ var DashboardTable = function (_React$Component) {
       var popoverHoverFocus = _react2.default.createElement(
         _Popover2.default,
         { id: 'popover-trigger-focus', title: 'What do the numbers and colors mean?' },
-        'NUMBERS: Represent the angle your main battery AP can penetrate that opponent\'s belt armor at ranges: 5km, 10km, 15km and maxkm, for both attacking and defending.',
+        'NUMBERS: Represent the angle main battery AP can penetrate belt armor to and from that opponent at ranges: 5km, 10km, 15km and maxkm.',
         _react2.default.createElement('br', null),
-        'COLORS: Represent how much of their ship can be pen by your HE: black:nothing, white:super, yellow:super/bow, orange:super/bow/deck/upper, red:can cit, for both attacking and defending.',
+        'NAME/TIER COLORS: Represent how much of a ship can be pen by HE. (name:to, tier:from): black:nothing, white:super, yellow:super/bow, orange:super/bow/deck/upper, red:can cit, for both attacking and defending.',
         _react2.default.createElement('br', null),
         'OVERMATCH BOW: are visible by the color both to and from: red:can, white:cannot'
       );

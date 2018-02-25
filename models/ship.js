@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var shipSchema = new Schema({
   name: String,
+  class: String,
   tier: String,
   quip: String,
   img: String,

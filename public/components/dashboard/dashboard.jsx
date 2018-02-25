@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import DashboardTable from './dashboardTable.jsx';
 import ships from '../../sampleData/ships.json';
@@ -25,14 +26,16 @@ export default class Dashboard extends React.Component {
         armor: {
           belt: 0
         }
-      }
-    }
+      },
+      ships: []
+    };
+    this.getShips();
   }
 
   componentWillMount() {
     if (this.props.match.params.ship) {
       var shipParams = this.props.match.params.ship
-      var findShip = ships.ships.find(
+      var findShip = this.state.ships.find(
         (sh) => {
           if (shipParams == sh.name) {
             return sh
@@ -48,7 +51,7 @@ export default class Dashboard extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     var shipParams = nextProps.match.params.ship
-    var findShip = ships.ships.find(
+    var findShip = this.state.ships.find(
       (sh) => {
         if (shipParams == sh.name) {
           return sh
@@ -59,6 +62,39 @@ export default class Dashboard extends React.Component {
         selectedShip: findShip
       });
     }
+  }
+
+  getShips() {
+    var that = this;
+    axios
+    .get(`/ships`)
+    .then(
+      function (res) {
+        console.log("GOT SHIPS", res.data);
+        var ships = res.data;
+        that.setState({
+          ships: res.data
+        });
+        if (that.props.match.params.ship) {
+          var shipParams = that.props.match.params.ship
+          var findShip = that.state.ships.find(
+            (sh) => {
+              if (shipParams == sh.name) {
+                return sh
+              }
+            });
+          if (findShip) {
+            that.setState({
+              selectedShip: findShip
+            });
+          }
+        }
+      }, function (err) {
+        console.log(err);
+      }
+    ).catch((err) => {
+      console.error("could not reach ships", err);
+    })
   }
 
   render () {
@@ -98,6 +134,7 @@ export default class Dashboard extends React.Component {
               <DashboardTable
                 match={this.props.match}
                 selectedShip={this.state.selectedShip}
+                ships={this.state.ships}
               />
             </Col>
           </Row>

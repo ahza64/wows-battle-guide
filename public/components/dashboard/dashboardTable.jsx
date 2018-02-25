@@ -1,7 +1,5 @@
 import React from 'react';
 
-import ships from '../../sampleData/ships.json';
-
 import Panel from 'react-bootstrap/lib/Panel';
 import Col from 'react-bootstrap/lib/Col';
 import Table from 'react-bootstrap/lib/Table';
@@ -16,26 +14,30 @@ export default class DashboardTable extends React.Component {
   constructor (props) {
     super(props);
 
-  }
-
-  componentWillMount() {
-    this.setState({
-      selectedShip: this.props.selectedShip
-    })
+    this.state = {
+      selectedShip: this.props.selectedShip,
+      ships: []
+    }
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState({
+      ships: nextProps.ships
+    })
     var shipParams = nextProps.match.params.ship
-    var findShip = ships.ships.find(
+    var findShip = nextProps.ships.find(
       (sh) => {
         if (shipParams == sh.name) {
           return sh
         }
       });
 
-    this.setState({
-      selectedShip: findShip
-    });
+    if (findShip) {
+      this.setState({
+        selectedShip: findShip,
+        ships: nextProps.ships
+      });
+    }
   }
 
   findAttackAngle(EnemyShip, range){
@@ -157,89 +159,215 @@ export default class DashboardTable extends React.Component {
                 <tr>
                   <td>
                     <ListGroup>
+                      {
+                        this.state.ships.map((EnemyShip, idx) => {
+                          if (EnemyShip.class === ("DD" || "CV")) {
+                            return (
+                              <ListGroupItem
+                                key={idx}
+                                header={
+                                  <h3>
+                                    <OverlayTrigger
+                                      placement="left"
+                                      overlay={
+                                        <Tooltip id="tooltip">
+                                          can you HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
+                                          red:can cit
+                                        </Tooltip>
+                                    }>
+                                      <u style={{color: this.getColor(EnemyShip)}}>
+                                        {EnemyShip.name}
+                                      </u>
+                                    </OverlayTrigger>{'  '}
+                                    <OverlayTrigger
+                                      placement="right"
+                                      overlay={
+                                        <Tooltip id="tooltip">
+                                          can enemy HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
+                                          red:can cit
+                                        </Tooltip>
+                                    }>
+                                      <u style={{color: this.getDefColor(EnemyShip)}}>
+                                        {EnemyShip.tier}
+                                      </u>
+                                    </OverlayTrigger>
+                                  </h3>
+                                }>
+                                <OverlayTrigger
+                                  placement="left"
+                                  overlay={
+                                    <Tooltip id="tooltip">
+                                      you overmatch enemy bow?<br/>white:no, red:yes
+                                    </Tooltip>
+                                }>
+                                  <span style={{color: this.overmatchColor(EnemyShip, "a")}}>
+                                    <span>atk:{this.findAttackAngle(EnemyShip, 5)}˚</span>
+                                    <span>{' '}{this.findAttackAngle(EnemyShip, 10)}˚</span>
+                                    <span>{' '}{this.findAttackAngle(EnemyShip, 15)}˚</span>
+                                  </span>
+                                </OverlayTrigger>
+                                <OverlayTrigger
+                                  placement="right"
+                                  overlay={
+                                    <Tooltip id="tooltip">
+                                      enemy overmatch your bow?<br/>white:no, red:yes
+                                    </Tooltip>
+                                }>
+                                  <span style={{color: this.overmatchColor(EnemyShip, "d")}}>
+                                    <span>{'    '}def:{this.findDefendAngle(EnemyShip, 5)}˚</span>
+                                    <span>{' '}{this.findDefendAngle(EnemyShip, 10)}˚</span>
+                                    <span>{' '}{this.findDefendAngle(EnemyShip, 15)}˚</span>
+                                  </span>
+                                </OverlayTrigger>
+                              </ListGroupItem>
+                            )
+                          }
+                        })
+                      }
                       <ListGroupItem>-angles they pen you-Shimakaze-angles you pen them-</ListGroupItem>
                       <ListGroupItem>-a note about why in catagory-Gearing</ListGroupItem>
                       <ListGroupItem>-color cordinate for HE/IFHE pen bow/deck-Z-52</ListGroupItem>
                       <ListGroupItem>-give cit over pen distance (if you can)-Khabarovsk</ListGroupItem>
                       <ListGroupItem>-overmatch bow and vice versa-Grozovoi</ListGroupItem>
-                      <ListGroupItem>Yueyang</ListGroupItem>
-                      <ListGroupItem>Hakuryu</ListGroupItem>
-                      <ListGroupItem>Midway</ListGroupItem>
+                      <ListGroupItem>-make selectable to remove matched ships-Yueyang</ListGroupItem>
                     </ListGroup>
                   </td>
                   <td>
                     <ListGroup>
                       {
-                        ships.ships.map((EnemyShip, idx) => {
-                          return (
-                            <ListGroupItem
-                              key={idx}
-                              header={<h3>
-                                        <OverlayTrigger
-                                          placement="left"
-                                          overlay={
-                                            <Tooltip id="tooltip">
-                                              can you HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
-                                              red:can cit
-                                            </Tooltip>
-                                        }>
-                                          <u style={{color: this.getColor(EnemyShip)}}>
-                                            {EnemyShip.name}
-                                          </u>
-                                        </OverlayTrigger>{'  '}
-                                        <OverlayTrigger
-                                          placement="right"
-                                          overlay={
-                                            <Tooltip id="tooltip">
-                                              can enemy HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
-                                              red:can cit
-                                            </Tooltip>
-                                        }>
-                                          <u style={{color: this.getDefColor(EnemyShip)}}>
-                                            {EnemyShip.tier}
-                                          </u>
-                                        </OverlayTrigger>
-                                      </h3>
-                              }>
-                              <OverlayTrigger
-                                placement="left"
-                                overlay={
-                                  <Tooltip id="tooltip">
-                                    you overmatch enemy bow?<br/>white:no, red:yes
-                                  </Tooltip>
-                              }>
-                                <span style={{color: this.overmatchColor(EnemyShip, "a")}}>
-                                  <span>atk:{this.findAttackAngle(EnemyShip, 5)}˚</span>
-                                  <span>{' '}{this.findAttackAngle(EnemyShip, 10)}˚</span>
-                                  <span>{' '}{this.findAttackAngle(EnemyShip, 15)}˚</span>
-                                </span>
-                              </OverlayTrigger>
-                              <OverlayTrigger
-                                placement="right"
-                                overlay={
-                                  <Tooltip id="tooltip">
-                                    enemy overmatch your bow?<br/>white:no, red:yes
-                                  </Tooltip>
-                              }>
-                                <span style={{color: this.overmatchColor(EnemyShip, "d")}}>
-                                  <span>{'    '}def:{this.findDefendAngle(EnemyShip, 5)}˚</span>
-                                  <span>{' '}{this.findDefendAngle(EnemyShip, 10)}˚</span>
-                                  <span>{' '}{this.findDefendAngle(EnemyShip, 15)}˚</span>
-                                </span>
-                              </OverlayTrigger>
-                            </ListGroupItem>
-                          )
+                        this.state.ships.map((EnemyShip, idx) => {
+                          if (EnemyShip.class === "CL") {
+                            return (
+                              <ListGroupItem
+                                key={idx}
+                                header={
+                                  <h3>
+                                    <OverlayTrigger
+                                      placement="left"
+                                      overlay={
+                                        <Tooltip id="tooltip">
+                                          can you HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
+                                          red:can cit
+                                        </Tooltip>
+                                    }>
+                                      <u style={{color: this.getColor(EnemyShip)}}>
+                                        {EnemyShip.name}
+                                      </u>
+                                    </OverlayTrigger>{'  '}
+                                    <OverlayTrigger
+                                      placement="right"
+                                      overlay={
+                                        <Tooltip id="tooltip">
+                                          can enemy HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
+                                          red:can cit
+                                        </Tooltip>
+                                    }>
+                                      <u style={{color: this.getDefColor(EnemyShip)}}>
+                                        {EnemyShip.tier}
+                                      </u>
+                                    </OverlayTrigger>
+                                  </h3>
+                                }>
+                                <OverlayTrigger
+                                  placement="left"
+                                  overlay={
+                                    <Tooltip id="tooltip">
+                                      you overmatch enemy bow?<br/>white:no, red:yes
+                                    </Tooltip>
+                                }>
+                                  <span style={{color: this.overmatchColor(EnemyShip, "a")}}>
+                                    <span>atk:{this.findAttackAngle(EnemyShip, 5)}˚</span>
+                                    <span>{' '}{this.findAttackAngle(EnemyShip, 10)}˚</span>
+                                    <span>{' '}{this.findAttackAngle(EnemyShip, 15)}˚</span>
+                                  </span>
+                                </OverlayTrigger>
+                                <OverlayTrigger
+                                  placement="right"
+                                  overlay={
+                                    <Tooltip id="tooltip">
+                                      enemy overmatch your bow?<br/>white:no, red:yes
+                                    </Tooltip>
+                                }>
+                                  <span style={{color: this.overmatchColor(EnemyShip, "d")}}>
+                                    <span>{'    '}def:{this.findDefendAngle(EnemyShip, 5)}˚</span>
+                                    <span>{' '}{this.findDefendAngle(EnemyShip, 10)}˚</span>
+                                    <span>{' '}{this.findDefendAngle(EnemyShip, 15)}˚</span>
+                                  </span>
+                                </OverlayTrigger>
+                              </ListGroupItem>
+                            )
+                          }
                         })
                       }
                     </ListGroup>
                   </td>
                   <td>
                     <ListGroup>
-                      <ListGroupItem>-make selectable to remove matched ships-Yamato</ListGroupItem>
-                      <ListGroupItem>Montana</ListGroupItem>
-                      <ListGroupItem>Großer Kurfurst</ListGroupItem>
-                      <ListGroupItem>Conqueror</ListGroupItem>
-                      <ListGroupItem>France</ListGroupItem>
+                      {
+                        this.state.ships.map((EnemyShip, idx) => {
+                          if (EnemyShip.class === "BB") {
+                            return (
+                              <ListGroupItem
+                                key={idx+.2}
+                                header={
+                                  <h3>
+                                    <OverlayTrigger
+                                      placement="left"
+                                      overlay={
+                                        <Tooltip id="tooltip">
+                                          can you HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
+                                          red:can cit
+                                        </Tooltip>
+                                    }>
+                                      <u style={{color: this.getColor(EnemyShip)}}>
+                                        {EnemyShip.name}
+                                      </u>
+                                    </OverlayTrigger>{'  '}
+                                    <OverlayTrigger
+                                      placement="right"
+                                      overlay={
+                                        <Tooltip id="tooltip">
+                                          can enemy HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
+                                          red:can cit
+                                        </Tooltip>
+                                    }>
+                                      <u style={{color: this.getDefColor(EnemyShip)}}>
+                                        {EnemyShip.tier}
+                                      </u>
+                                    </OverlayTrigger>
+                                  </h3>
+                                }>
+                                <OverlayTrigger
+                                  placement="left"
+                                  overlay={
+                                    <Tooltip id="tooltip">
+                                      you overmatch enemy bow?<br/>white:no, red:yes
+                                    </Tooltip>
+                                }>
+                                  <span style={{color: this.overmatchColor(EnemyShip, "a")}}>
+                                    <span>atk:{this.findAttackAngle(EnemyShip, 5)}˚</span>
+                                    <span>{' '}{this.findAttackAngle(EnemyShip, 10)}˚</span>
+                                    <span>{' '}{this.findAttackAngle(EnemyShip, 15)}˚</span>
+                                  </span>
+                                </OverlayTrigger>
+                                <OverlayTrigger
+                                  placement="right"
+                                  overlay={
+                                    <Tooltip id="tooltip">
+                                      enemy overmatch your bow?<br/>white:no, red:yes
+                                    </Tooltip>
+                                }>
+                                  <span style={{color: this.overmatchColor(EnemyShip, "d")}}>
+                                    <span>{'    '}def:{this.findDefendAngle(EnemyShip, 5)}˚</span>
+                                    <span>{' '}{this.findDefendAngle(EnemyShip, 10)}˚</span>
+                                    <span>{' '}{this.findDefendAngle(EnemyShip, 15)}˚</span>
+                                  </span>
+                                </OverlayTrigger>
+                              </ListGroupItem>
+                            )
+                          }
+                        })
+                      }
                     </ListGroup>
                   </td>
                 </tr>

@@ -1,5 +1,5 @@
 {
-  "shipList": [
+  "shipListEveryone": [
     "Zao",
     "Des Moines",
     "Moskva",
@@ -7,7 +7,7 @@
     "Minotaur",
     "Henri IV"
   ],
-  "shipListEveryone": [
+  "shipList": [
     "Shimakaze",
     "Gearing",
     "Z-52",
@@ -20,6 +20,11 @@
     "Zao",
     "Des Monies",
     "Hindenburg",
-    "Henri IV"
+    "Henri IV",
+    "Yamato",
+    "Montana",
+    "Grosser Kurfurst",
+    "Conqueror",
+    "France"
   ]
 }

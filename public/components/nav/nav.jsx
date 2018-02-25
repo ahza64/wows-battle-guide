@@ -20,6 +20,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
 
   constructor (props) {
     super(props);
+    console.log(this.props.match);
 
     this.state = {
       dashButton: 'dashboard',
@@ -31,7 +32,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
 
   componentWillMount() {
     this.setState({
-      fireRedirect: false
+      fireRedirect: false,
     })
   }
 

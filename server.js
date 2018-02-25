@@ -1,8 +1,11 @@
 var express = require('express');
+var controllers = require("./controllers");
 
 var app = express();
 
 app.use(express.static('public'));
+
+app.get('/ships', controllers.ships.index);
 
 app.get(['/'], function (req, res) {
   res.sendFile(__dirname + '/public/index.html');

@@ -60806,7 +60806,7 @@ exports.default = _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_pr
 /* 513 */
 /***/ (function(module, exports) {
 
-module.exports = {"shipListEveryone":["Zao","Des Moines","Moskva","Hindenburg","Minotaur","Henri IV"],"shipList":["Shimakaze","Gearing","Z-52","Khabarovsk","Grozovoi","Yueyang","Hakuryu","Midway","Moskva","Zao","Des Monies","Hindenburg","Henri IV","Yamato","Montana","Grosser Kurfurst","Conqueror","France"]}
+module.exports = {"shipListEveryone":["Zao","Des Moines","Moskva","Hindenburg","Minotaur","Henri IV"],"shipList":["Shimakaze","Gearing","Z-52","Khabarovsk","Grozovoi","Yueyang","Hakuryu","Midway","Moskva","Zao","Des Moines","Hindenburg","Henri IV","Yamato","Montana","Grosser Kurfurst","Conqueror","France"]}
 
 /***/ }),
 /* 514 */

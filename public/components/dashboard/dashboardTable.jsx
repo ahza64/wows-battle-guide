@@ -41,26 +41,52 @@ export default class DashboardTable extends React.Component {
   }
 
   findAttackAngle(EnemyShip, range){
+    var resObj = {angle: 0, color: 'black'}
     var kmRange = `km${range}`
     var armor = EnemyShip.armor.belt;
     var penVal = this.state.selectedShip.mainGuns.AP.penValues[kmRange];
     var angle = (90-(Math.acos(armor/penVal))/(Math.PI / 180)).toFixed(1);
     if (angle == "NaN") {
-      return "0"
+      resObj.angle = 0;
+      return resObj
     }else{
-      return angle
+      resObj.angle = angle;
+      if (resObj.angle >= 45) {
+        resObj.color = "red";
+        return resObj;
+      }else if (resObj.angle >= 30) {
+        resObj.color = "yellow";
+        return resObj;
+      }else if (resObj.angle < 30){
+        resObj.color = "green";
+        return resObj;
+      }
+      return resObj
     }
   }
 
   findDefendAngle(EnemyShip, range) {
+    var resObj = {angle: 0, color: 'black'}
     var kmRange = `km${range}`
     var armor = this.state.selectedShip.armor.belt;
     var penVal = EnemyShip.mainGuns.AP.penValues[kmRange];
     var angle = (90-(Math.acos(armor/penVal))/(Math.PI / 180)).toFixed(1);
     if (angle == "NaN") {
-      return "0"
+      resObj.angle = 0;
+      return resObj
     }else{
-      return angle
+      resObj.angle = angle;
+      if (resObj.angle >= 45) {
+        resObj.color = "green";
+        return resObj;
+      }else if (resObj.angle >= 30) {
+        resObj.color = "yellow";
+        return resObj;
+      }else if (resObj.angle < 30){
+        resObj.color = "red";
+        return resObj;
+      }
+      return resObj
     }
   }
 
@@ -85,10 +111,13 @@ export default class DashboardTable extends React.Component {
   getColor(EnemyShip) {
     var hePen = this.state.selectedShip.mainGuns.cal/6;
     if ((hePen > EnemyShip.armor.belt) && (EnemyShip.armor.layered == false)) {
-      return 'red'
+      return 'purple'
     }else if (hePen > EnemyShip.armor.structure) {
       if (hePen > EnemyShip.armor.bow) {
-        if ((hePen > EnemyShip.armor.deck) && (hePen > EnemyShip.armor.upperHull)) {
+        if (hePen > EnemyShip.armor.deck) {
+          if (hePen > EnemyShip.armor.upperHull) {
+            return 'red'
+          }
           return 'orange'
         }
         return 'yellow'
@@ -123,8 +152,8 @@ export default class DashboardTable extends React.Component {
       and from that opponent at ranges: 5km, 10km, 15km and maxkm.
       <br/>
       NAME/TIER COLORS: Represent how much of a ship can be pen by HE. (name:to,
-      tier:from): black:nothing, white:super, yellow:super/bow, orange:super/bow/deck/upper,
-      red:can cit, for both attacking and defending.
+      tier:from): black:nothing, white:super, yellow:+bow, orange:+deck,
+      red:+upper hull, purple:can cit, for both attacking and defending.
       <br/>
       OVERMATCH BOW: are visible by the color both to and from:
       red:can, white:cannot
@@ -171,8 +200,8 @@ export default class DashboardTable extends React.Component {
                                       placement="left"
                                       overlay={
                                         <Tooltip id="tooltip">
-                                          can you HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:super/bow, orange:super/bow/deck/upper,
-                                          red:can cit
+                                          can you HE pen?<br/>black:nothing,<br/>white:super,<br/>yellow:+bow,<br/>orange:+deck,
+                                          <br/>red:+upper hull,<br/>purple:can cit
                                         </Tooltip>
                                     }>
                                       <u style={{color: this.getColor(EnemyShip)}}>
@@ -200,11 +229,12 @@ export default class DashboardTable extends React.Component {
                                       you overmatch enemy bow?<br/>white:no, red:yes
                                     </Tooltip>
                                 }>
-                                  <span style={{color: this.overmatchColor(EnemyShip, "a")}}>
-                                    <span>atk:{this.findAttackAngle(EnemyShip, 5)}˚</span>
-                                    <span>{' '}{this.findAttackAngle(EnemyShip, 10)}˚</span>
-                                    <span>{' '}{this.findAttackAngle(EnemyShip, 15)}˚</span>
-                                  </span>
+                                <span>
+                                  <span  style={{color: this.overmatchColor(EnemyShip, "a")}}>{'    '}atk:</span>
+                                  <span style={{color: this.findAttackAngle(EnemyShip, 5).color}}>{this.findAttackAngle(EnemyShip, 5).angle}˚</span>
+                                  <span style={{color: this.findAttackAngle(EnemyShip, 10).color}}>{' '}{this.findAttackAngle(EnemyShip, 10).angle}˚</span>
+                                  <span style={{color: this.findAttackAngle(EnemyShip, 15).color}}>{' '}{this.findAttackAngle(EnemyShip, 15).angle}˚</span>
+                                </span>
                                 </OverlayTrigger>
                                 <OverlayTrigger
                                   placement="right"
@@ -213,22 +243,23 @@ export default class DashboardTable extends React.Component {
                                       enemy overmatch your bow?<br/>white:no, red:yes
                                     </Tooltip>
                                 }>
-                                  <span style={{color: this.overmatchColor(EnemyShip, "d")}}>
-                                    <span>{'    '}def:{this.findDefendAngle(EnemyShip, 5)}˚</span>
-                                    <span>{' '}{this.findDefendAngle(EnemyShip, 10)}˚</span>
-                                    <span>{' '}{this.findDefendAngle(EnemyShip, 15)}˚</span>
-                                  </span>
+                                <span>
+                                  <span  style={{color: this.overmatchColor(EnemyShip, "d")}}>{'    '}def:</span>
+                                  <span style={{color: this.findDefendAngle(EnemyShip, 5).color}}>{this.findDefendAngle(EnemyShip, 5).angle}˚</span>
+                                  <span style={{color: this.findDefendAngle(EnemyShip, 10).color}}>{' '}{this.findDefendAngle(EnemyShip, 10).angle}˚</span>
+                                  <span style={{color: this.findDefendAngle(EnemyShip, 15).color}}>{' '}{this.findDefendAngle(EnemyShip, 15).angle}˚</span>
+                                </span>
                                 </OverlayTrigger>
                               </ListGroupItem>
                             )
                           }
                         })
                       }
-                      <ListGroupItem>-angles they pen you-Shimakaze-angles you pen them-</ListGroupItem>
+                      <ListGroupItem>-!!order ships by recent popularity!!-Shimakaze</ListGroupItem>
                       <ListGroupItem>-a note about why in catagory-Gearing</ListGroupItem>
-                      <ListGroupItem>-color cordinate for HE/IFHE pen bow/deck-Z-52</ListGroupItem>
+                      <ListGroupItem>-Z-52</ListGroupItem>
                       <ListGroupItem>-give cit over pen distance (if you can)-Khabarovsk</ListGroupItem>
-                      <ListGroupItem>-overmatch bow and vice versa-Grozovoi</ListGroupItem>
+                      <ListGroupItem>Grozovoi</ListGroupItem>
                       <ListGroupItem>-make selectable to remove matched ships-Yueyang</ListGroupItem>
                     </ListGroup>
                   </td>
@@ -275,10 +306,11 @@ export default class DashboardTable extends React.Component {
                                       you overmatch enemy bow?<br/>white:no, red:yes
                                     </Tooltip>
                                 }>
-                                  <span style={{color: this.overmatchColor(EnemyShip, "a")}}>
-                                    <span>atk:{this.findAttackAngle(EnemyShip, 5)}˚</span>
-                                    <span>{' '}{this.findAttackAngle(EnemyShip, 10)}˚</span>
-                                    <span>{' '}{this.findAttackAngle(EnemyShip, 15)}˚</span>
+                                  <span>
+                                    <span  style={{color: this.overmatchColor(EnemyShip, "a")}}>{'    '}atk:</span>
+                                    <span style={{color: this.findAttackAngle(EnemyShip, 5).color}}>{this.findAttackAngle(EnemyShip, 5).angle}˚</span>
+                                    <span style={{color: this.findAttackAngle(EnemyShip, 10).color}}>{' '}{this.findAttackAngle(EnemyShip, 10).angle}˚</span>
+                                    <span style={{color: this.findAttackAngle(EnemyShip, 15).color}}>{' '}{this.findAttackAngle(EnemyShip, 15).angle}˚</span>
                                   </span>
                                 </OverlayTrigger>
                                 <OverlayTrigger
@@ -288,10 +320,11 @@ export default class DashboardTable extends React.Component {
                                       enemy overmatch your bow?<br/>white:no, red:yes
                                     </Tooltip>
                                 }>
-                                  <span style={{color: this.overmatchColor(EnemyShip, "d")}}>
-                                    <span>{'    '}def:{this.findDefendAngle(EnemyShip, 5)}˚</span>
-                                    <span>{' '}{this.findDefendAngle(EnemyShip, 10)}˚</span>
-                                    <span>{' '}{this.findDefendAngle(EnemyShip, 15)}˚</span>
+                                  <span>
+                                    <span  style={{color: this.overmatchColor(EnemyShip, "d")}}>{'    '}def:</span>
+                                    <span style={{color: this.findDefendAngle(EnemyShip, 5).color}}>{this.findDefendAngle(EnemyShip, 5).angle}˚</span>
+                                    <span style={{color: this.findDefendAngle(EnemyShip, 10).color}}>{' '}{this.findDefendAngle(EnemyShip, 10).angle}˚</span>
+                                    <span style={{color: this.findDefendAngle(EnemyShip, 15).color}}>{' '}{this.findDefendAngle(EnemyShip, 15).angle}˚</span>
                                   </span>
                                 </OverlayTrigger>
                               </ListGroupItem>
@@ -344,10 +377,12 @@ export default class DashboardTable extends React.Component {
                                       you overmatch enemy bow?<br/>white:no, red:yes
                                     </Tooltip>
                                 }>
-                                  <span style={{color: this.overmatchColor(EnemyShip, "a")}}>
-                                    <span>atk:{this.findAttackAngle(EnemyShip, 5)}˚</span>
-                                    <span>{' '}{this.findAttackAngle(EnemyShip, 10)}˚</span>
-                                    <span>{' '}{this.findAttackAngle(EnemyShip, 15)}˚</span>
+
+                                  <span>
+                                    <span  style={{color: this.overmatchColor(EnemyShip, "a")}}>{'    '}atk:</span>
+                                    <span style={{color: this.findAttackAngle(EnemyShip, 5).color}}>{this.findAttackAngle(EnemyShip, 5).angle}˚</span>
+                                    <span style={{color: this.findAttackAngle(EnemyShip, 10).color}}>{' '}{this.findAttackAngle(EnemyShip, 10).angle}˚</span>
+                                    <span style={{color: this.findAttackAngle(EnemyShip, 15).color}}>{' '}{this.findAttackAngle(EnemyShip, 15).angle}˚</span>
                                   </span>
                                 </OverlayTrigger>
                                 <OverlayTrigger
@@ -357,11 +392,12 @@ export default class DashboardTable extends React.Component {
                                       enemy overmatch your bow?<br/>white:no, red:yes
                                     </Tooltip>
                                 }>
-                                  <span style={{color: this.overmatchColor(EnemyShip, "d")}}>
-                                    <span>{'    '}def:{this.findDefendAngle(EnemyShip, 5)}˚</span>
-                                    <span>{' '}{this.findDefendAngle(EnemyShip, 10)}˚</span>
-                                    <span>{' '}{this.findDefendAngle(EnemyShip, 15)}˚</span>
-                                  </span>
+                                <span>
+                                  <span  style={{color: this.overmatchColor(EnemyShip, "d")}}>{'    '}def:</span>
+                                  <span style={{color: this.findDefendAngle(EnemyShip, 5).color}}>{this.findDefendAngle(EnemyShip, 5).angle}˚</span>
+                                  <span style={{color: this.findDefendAngle(EnemyShip, 10).color}}>{' '}{this.findDefendAngle(EnemyShip, 10).angle}˚</span>
+                                  <span style={{color: this.findDefendAngle(EnemyShip, 15).color}}>{' '}{this.findDefendAngle(EnemyShip, 15).angle}˚</span>
+                                </span>
                                 </OverlayTrigger>
                               </ListGroupItem>
                             )

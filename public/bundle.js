@@ -60806,7 +60806,7 @@ exports.default = _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_pr
 /* 513 */
 /***/ (function(module, exports) {
 
-module.exports = {"shipListEveryone":["Zao","Des Moines","Moskva","Hindenburg","Minotaur","Henri IV"],"shipList":["Shimakaze","Gearing","Z-52","Khabarovsk","Grozovoi","Yueyang","Hakuryu","Midway","Moskva","Zao","Des Moines","Hindenburg","Henri IV","Yamato","Montana","Grosser Kurfurst","Conqueror","France"]}
+module.exports = {"shipListEveryone":["Zao","Des Moines","Moskva","Hindenburg","Minotaur","Henri IV"],"shipList":["Shimakaze","Gearing","Z-52","Khabarovsk","Grozovoi","Yueyang","Hakuryu","Midway","Moskva","Zao","Des Moines","Hindenburg","Minotaur","Henri IV","Yamato","Montana","Grosser Kurfurst","Conqueror","France"]}
 
 /***/ }),
 /* 514 */
@@ -65057,27 +65057,53 @@ var DashboardTable = function (_React$Component) {
   }, {
     key: 'findAttackAngle',
     value: function findAttackAngle(EnemyShip, range) {
+      var resObj = { angle: 0, color: 'black' };
       var kmRange = 'km' + range;
       var armor = EnemyShip.armor.belt;
       var penVal = this.state.selectedShip.mainGuns.AP.penValues[kmRange];
       var angle = (90 - Math.acos(armor / penVal) / (Math.PI / 180)).toFixed(1);
       if (angle == "NaN") {
-        return "0";
+        resObj.angle = 0;
+        return resObj;
       } else {
-        return angle;
+        resObj.angle = angle;
+        if (resObj.angle >= 45) {
+          resObj.color = "red";
+          return resObj;
+        } else if (resObj.angle >= 30) {
+          resObj.color = "yellow";
+          return resObj;
+        } else if (resObj.angle < 30) {
+          resObj.color = "green";
+          return resObj;
+        }
+        return resObj;
       }
     }
   }, {
     key: 'findDefendAngle',
     value: function findDefendAngle(EnemyShip, range) {
+      var resObj = { angle: 0, color: 'black' };
       var kmRange = 'km' + range;
       var armor = this.state.selectedShip.armor.belt;
       var penVal = EnemyShip.mainGuns.AP.penValues[kmRange];
       var angle = (90 - Math.acos(armor / penVal) / (Math.PI / 180)).toFixed(1);
       if (angle == "NaN") {
-        return "0";
+        resObj.angle = 0;
+        return resObj;
       } else {
-        return angle;
+        resObj.angle = angle;
+        if (resObj.angle >= 45) {
+          resObj.color = "green";
+          return resObj;
+        } else if (resObj.angle >= 30) {
+          resObj.color = "yellow";
+          return resObj;
+        } else if (resObj.angle < 30) {
+          resObj.color = "red";
+          return resObj;
+        }
+        return resObj;
       }
     }
   }, {
@@ -65104,10 +65130,13 @@ var DashboardTable = function (_React$Component) {
     value: function getColor(EnemyShip) {
       var hePen = this.state.selectedShip.mainGuns.cal / 6;
       if (hePen > EnemyShip.armor.belt && EnemyShip.armor.layered == false) {
-        return 'red';
+        return 'purple';
       } else if (hePen > EnemyShip.armor.structure) {
         if (hePen > EnemyShip.armor.bow) {
-          if (hePen > EnemyShip.armor.deck && hePen > EnemyShip.armor.upperHull) {
+          if (hePen > EnemyShip.armor.deck) {
+            if (hePen > EnemyShip.armor.upperHull) {
+              return 'red';
+            }
             return 'orange';
           }
           return 'yellow';
@@ -65145,7 +65174,7 @@ var DashboardTable = function (_React$Component) {
         { id: 'popover-trigger-focus', title: 'What do the numbers and colors mean?' },
         'NUMBERS: Represent the angle main battery AP can penetrate belt armor to and from that opponent at ranges: 5km, 10km, 15km and maxkm.',
         _react2.default.createElement('br', null),
-        'NAME/TIER COLORS: Represent how much of a ship can be pen by HE. (name:to, tier:from): black:nothing, white:super, yellow:super/bow, orange:super/bow/deck/upper, red:can cit, for both attacking and defending.',
+        'NAME/TIER COLORS: Represent how much of a ship can be pen by HE. (name:to, tier:from): black:nothing, white:super, yellow:+bow, orange:+deck, red:+upper hull, purple:can cit, for both attacking and defending.',
         _react2.default.createElement('br', null),
         'OVERMATCH BOW: are visible by the color both to and from: red:can, white:cannot'
       );
@@ -65239,7 +65268,13 @@ var DashboardTable = function (_React$Component) {
                                       _react2.default.createElement('br', null),
                                       'white:super,',
                                       _react2.default.createElement('br', null),
-                                      'yellow:super/bow, orange:super/bow/deck/upper, red:can cit'
+                                      'yellow:+bow,',
+                                      _react2.default.createElement('br', null),
+                                      'orange:+deck,',
+                                      _react2.default.createElement('br', null),
+                                      'red:+upper hull,',
+                                      _react2.default.createElement('br', null),
+                                      'purple:can cit'
                                     ) },
                                   _react2.default.createElement(
                                     'u',
@@ -65283,26 +65318,31 @@ var DashboardTable = function (_React$Component) {
                                 ) },
                               _react2.default.createElement(
                                 'span',
-                                { style: { color: _this2.overmatchColor(EnemyShip, "a") } },
+                                null,
                                 _react2.default.createElement(
                                   'span',
-                                  null,
-                                  'atk:',
-                                  _this2.findAttackAngle(EnemyShip, 5),
+                                  { style: { color: _this2.overmatchColor(EnemyShip, "a") } },
+                                  '    ',
+                                  'atk:'
+                                ),
+                                _react2.default.createElement(
+                                  'span',
+                                  { style: { color: _this2.findAttackAngle(EnemyShip, 5).color } },
+                                  _this2.findAttackAngle(EnemyShip, 5).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findAttackAngle(EnemyShip, 10).color } },
                                   ' ',
-                                  _this2.findAttackAngle(EnemyShip, 10),
+                                  _this2.findAttackAngle(EnemyShip, 10).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findAttackAngle(EnemyShip, 15).color } },
                                   ' ',
-                                  _this2.findAttackAngle(EnemyShip, 15),
+                                  _this2.findAttackAngle(EnemyShip, 15).angle,
                                   '\u02DA'
                                 )
                               )
@@ -65320,27 +65360,31 @@ var DashboardTable = function (_React$Component) {
                                 ) },
                               _react2.default.createElement(
                                 'span',
-                                { style: { color: _this2.overmatchColor(EnemyShip, "d") } },
+                                null,
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.overmatchColor(EnemyShip, "d") } },
                                   '    ',
-                                  'def:',
-                                  _this2.findDefendAngle(EnemyShip, 5),
+                                  'def:'
+                                ),
+                                _react2.default.createElement(
+                                  'span',
+                                  { style: { color: _this2.findDefendAngle(EnemyShip, 5).color } },
+                                  _this2.findDefendAngle(EnemyShip, 5).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findDefendAngle(EnemyShip, 10).color } },
                                   ' ',
-                                  _this2.findDefendAngle(EnemyShip, 10),
+                                  _this2.findDefendAngle(EnemyShip, 10).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findDefendAngle(EnemyShip, 15).color } },
                                   ' ',
-                                  _this2.findDefendAngle(EnemyShip, 15),
+                                  _this2.findDefendAngle(EnemyShip, 15).angle,
                                   '\u02DA'
                                 )
                               )
@@ -65351,7 +65395,7 @@ var DashboardTable = function (_React$Component) {
                       _react2.default.createElement(
                         _ListGroupItem2.default,
                         null,
-                        '-angles they pen you-Shimakaze-angles you pen them-'
+                        '-!!order ships by recent popularity!!-Shimakaze'
                       ),
                       _react2.default.createElement(
                         _ListGroupItem2.default,
@@ -65361,7 +65405,7 @@ var DashboardTable = function (_React$Component) {
                       _react2.default.createElement(
                         _ListGroupItem2.default,
                         null,
-                        '-color cordinate for HE/IFHE pen bow/deck-Z-52'
+                        '-Z-52'
                       ),
                       _react2.default.createElement(
                         _ListGroupItem2.default,
@@ -65371,7 +65415,7 @@ var DashboardTable = function (_React$Component) {
                       _react2.default.createElement(
                         _ListGroupItem2.default,
                         null,
-                        '-overmatch bow and vice versa-Grozovoi'
+                        'Grozovoi'
                       ),
                       _react2.default.createElement(
                         _ListGroupItem2.default,
@@ -65452,26 +65496,31 @@ var DashboardTable = function (_React$Component) {
                                 ) },
                               _react2.default.createElement(
                                 'span',
-                                { style: { color: _this2.overmatchColor(EnemyShip, "a") } },
+                                null,
                                 _react2.default.createElement(
                                   'span',
-                                  null,
-                                  'atk:',
-                                  _this2.findAttackAngle(EnemyShip, 5),
+                                  { style: { color: _this2.overmatchColor(EnemyShip, "a") } },
+                                  '    ',
+                                  'atk:'
+                                ),
+                                _react2.default.createElement(
+                                  'span',
+                                  { style: { color: _this2.findAttackAngle(EnemyShip, 5).color } },
+                                  _this2.findAttackAngle(EnemyShip, 5).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findAttackAngle(EnemyShip, 10).color } },
                                   ' ',
-                                  _this2.findAttackAngle(EnemyShip, 10),
+                                  _this2.findAttackAngle(EnemyShip, 10).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findAttackAngle(EnemyShip, 15).color } },
                                   ' ',
-                                  _this2.findAttackAngle(EnemyShip, 15),
+                                  _this2.findAttackAngle(EnemyShip, 15).angle,
                                   '\u02DA'
                                 )
                               )
@@ -65489,27 +65538,31 @@ var DashboardTable = function (_React$Component) {
                                 ) },
                               _react2.default.createElement(
                                 'span',
-                                { style: { color: _this2.overmatchColor(EnemyShip, "d") } },
+                                null,
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.overmatchColor(EnemyShip, "d") } },
                                   '    ',
-                                  'def:',
-                                  _this2.findDefendAngle(EnemyShip, 5),
+                                  'def:'
+                                ),
+                                _react2.default.createElement(
+                                  'span',
+                                  { style: { color: _this2.findDefendAngle(EnemyShip, 5).color } },
+                                  _this2.findDefendAngle(EnemyShip, 5).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findDefendAngle(EnemyShip, 10).color } },
                                   ' ',
-                                  _this2.findDefendAngle(EnemyShip, 10),
+                                  _this2.findDefendAngle(EnemyShip, 10).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findDefendAngle(EnemyShip, 15).color } },
                                   ' ',
-                                  _this2.findDefendAngle(EnemyShip, 15),
+                                  _this2.findDefendAngle(EnemyShip, 15).angle,
                                   '\u02DA'
                                 )
                               )
@@ -65591,26 +65644,31 @@ var DashboardTable = function (_React$Component) {
                                 ) },
                               _react2.default.createElement(
                                 'span',
-                                { style: { color: _this2.overmatchColor(EnemyShip, "a") } },
+                                null,
                                 _react2.default.createElement(
                                   'span',
-                                  null,
-                                  'atk:',
-                                  _this2.findAttackAngle(EnemyShip, 5),
+                                  { style: { color: _this2.overmatchColor(EnemyShip, "a") } },
+                                  '    ',
+                                  'atk:'
+                                ),
+                                _react2.default.createElement(
+                                  'span',
+                                  { style: { color: _this2.findAttackAngle(EnemyShip, 5).color } },
+                                  _this2.findAttackAngle(EnemyShip, 5).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findAttackAngle(EnemyShip, 10).color } },
                                   ' ',
-                                  _this2.findAttackAngle(EnemyShip, 10),
+                                  _this2.findAttackAngle(EnemyShip, 10).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findAttackAngle(EnemyShip, 15).color } },
                                   ' ',
-                                  _this2.findAttackAngle(EnemyShip, 15),
+                                  _this2.findAttackAngle(EnemyShip, 15).angle,
                                   '\u02DA'
                                 )
                               )
@@ -65628,27 +65686,31 @@ var DashboardTable = function (_React$Component) {
                                 ) },
                               _react2.default.createElement(
                                 'span',
-                                { style: { color: _this2.overmatchColor(EnemyShip, "d") } },
+                                null,
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.overmatchColor(EnemyShip, "d") } },
                                   '    ',
-                                  'def:',
-                                  _this2.findDefendAngle(EnemyShip, 5),
+                                  'def:'
+                                ),
+                                _react2.default.createElement(
+                                  'span',
+                                  { style: { color: _this2.findDefendAngle(EnemyShip, 5).color } },
+                                  _this2.findDefendAngle(EnemyShip, 5).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findDefendAngle(EnemyShip, 10).color } },
                                   ' ',
-                                  _this2.findDefendAngle(EnemyShip, 10),
+                                  _this2.findDefendAngle(EnemyShip, 10).angle,
                                   '\u02DA'
                                 ),
                                 _react2.default.createElement(
                                   'span',
-                                  null,
+                                  { style: { color: _this2.findDefendAngle(EnemyShip, 15).color } },
                                   ' ',
-                                  _this2.findDefendAngle(EnemyShip, 15),
+                                  _this2.findDefendAngle(EnemyShip, 15).angle,
                                   '\u02DA'
                                 )
                               )

@@ -14,9 +14,9 @@ import Dropdown from 'react-bootstrap/lib/Dropdown';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 
-import muiThemeable from 'material-ui/styles/muiThemeable';
 
-export default muiThemeable()(class ParentNav extends React.Component {
+
+export default class ParentNav extends React.Component {
 
   constructor (props) {
     super(props);
@@ -64,7 +64,7 @@ export default muiThemeable()(class ParentNav extends React.Component {
       <Navbar fixedTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <div>World of Warships Battle Guide (version 0.1.0)</div>
+            <div>World of Warships Battle Guide (version 0.2.0)</div>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -112,4 +112,4 @@ export default muiThemeable()(class ParentNav extends React.Component {
       </Navbar>
     )
   }
-})
+}

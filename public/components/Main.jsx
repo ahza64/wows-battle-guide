@@ -1,4 +1,4 @@
-//Modules
+//Routing everything out
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -19,6 +19,14 @@ export default class Main extends React.Component {
   render() {
     return (
       <div>
+        {/*
+          Switch acts as a template fill area for the navbar component. This allows
+          the navbar to be a seperate component, while allowing different routes
+          for different fills. The Redirect is necessary, because the dynamic
+          routing and asynchronous component rendering, requires the synchronous
+          blocking of HTML to allow time for everything to build, before trying
+          fill it.
+        */}
         <main style={{marginTop: "50px"}}>
           <Route path='/' component={ParentNav}/>
           <Switch>

@@ -230,7 +230,7 @@ export default class DashboardTable extends React.Component {
                                     </Tooltip>
                                 }>
                                 <span>
-                                  <span  style={{color: this.overmatchColor(EnemyShip, "a")}}>{'    '}atk:</span>
+                                  <span  style={{color: this.overmatchColor(EnemyShip, "a")}}>{'    '}-atk:</span>
                                   <span style={{color: this.findAttackAngle(EnemyShip, 5).color}}>{this.findAttackAngle(EnemyShip, 5).angle}˚</span>
                                   <span style={{color: this.findAttackAngle(EnemyShip, 10).color}}>{' '}{this.findAttackAngle(EnemyShip, 10).angle}˚</span>
                                   <span style={{color: this.findAttackAngle(EnemyShip, 15).color}}>{' '}{this.findAttackAngle(EnemyShip, 15).angle}˚</span>
@@ -244,7 +244,7 @@ export default class DashboardTable extends React.Component {
                                     </Tooltip>
                                 }>
                                 <span>
-                                  <span  style={{color: this.overmatchColor(EnemyShip, "d")}}>{'    '}def:</span>
+                                  <span  style={{color: this.overmatchColor(EnemyShip, "d")}}>{'    '}-def:</span>
                                   <span style={{color: this.findDefendAngle(EnemyShip, 5).color}}>{this.findDefendAngle(EnemyShip, 5).angle}˚</span>
                                   <span style={{color: this.findDefendAngle(EnemyShip, 10).color}}>{' '}{this.findDefendAngle(EnemyShip, 10).angle}˚</span>
                                   <span style={{color: this.findDefendAngle(EnemyShip, 15).color}}>{' '}{this.findDefendAngle(EnemyShip, 15).angle}˚</span>
@@ -307,7 +307,7 @@ export default class DashboardTable extends React.Component {
                                     </Tooltip>
                                 }>
                                   <span>
-                                    <span  style={{color: this.overmatchColor(EnemyShip, "a")}}>{'    '}atk:</span>
+                                    <span  style={{color: this.overmatchColor(EnemyShip, "a")}}>{'    '}-atk:</span>
                                     <span style={{color: this.findAttackAngle(EnemyShip, 5).color}}>{this.findAttackAngle(EnemyShip, 5).angle}˚</span>
                                     <span style={{color: this.findAttackAngle(EnemyShip, 10).color}}>{' '}{this.findAttackAngle(EnemyShip, 10).angle}˚</span>
                                     <span style={{color: this.findAttackAngle(EnemyShip, 15).color}}>{' '}{this.findAttackAngle(EnemyShip, 15).angle}˚</span>
@@ -321,7 +321,7 @@ export default class DashboardTable extends React.Component {
                                     </Tooltip>
                                 }>
                                   <span>
-                                    <span  style={{color: this.overmatchColor(EnemyShip, "d")}}>{'    '}def:</span>
+                                    <span  style={{color: this.overmatchColor(EnemyShip, "d")}}>{'    '}-def:</span>
                                     <span style={{color: this.findDefendAngle(EnemyShip, 5).color}}>{this.findDefendAngle(EnemyShip, 5).angle}˚</span>
                                     <span style={{color: this.findDefendAngle(EnemyShip, 10).color}}>{' '}{this.findDefendAngle(EnemyShip, 10).angle}˚</span>
                                     <span style={{color: this.findDefendAngle(EnemyShip, 15).color}}>{' '}{this.findDefendAngle(EnemyShip, 15).angle}˚</span>
@@ -379,7 +379,7 @@ export default class DashboardTable extends React.Component {
                                 }>
 
                                   <span>
-                                    <span  style={{color: this.overmatchColor(EnemyShip, "a")}}>{'    '}atk:</span>
+                                    <span  style={{color: this.overmatchColor(EnemyShip, "a")}}>{'    '}-atk:</span>
                                     <span style={{color: this.findAttackAngle(EnemyShip, 5).color}}>{this.findAttackAngle(EnemyShip, 5).angle}˚</span>
                                     <span style={{color: this.findAttackAngle(EnemyShip, 10).color}}>{' '}{this.findAttackAngle(EnemyShip, 10).angle}˚</span>
                                     <span style={{color: this.findAttackAngle(EnemyShip, 15).color}}>{' '}{this.findAttackAngle(EnemyShip, 15).angle}˚</span>
@@ -393,7 +393,7 @@ export default class DashboardTable extends React.Component {
                                     </Tooltip>
                                 }>
                                 <span>
-                                  <span  style={{color: this.overmatchColor(EnemyShip, "d")}}>{'    '}def:</span>
+                                  <span  style={{color: this.overmatchColor(EnemyShip, "d")}}>{'    '}-def:</span>
                                   <span style={{color: this.findDefendAngle(EnemyShip, 5).color}}>{this.findDefendAngle(EnemyShip, 5).angle}˚</span>
                                   <span style={{color: this.findDefendAngle(EnemyShip, 10).color}}>{' '}{this.findDefendAngle(EnemyShip, 10).angle}˚</span>
                                   <span style={{color: this.findDefendAngle(EnemyShip, 15).color}}>{' '}{this.findDefendAngle(EnemyShip, 15).angle}˚</span>

@@ -65323,7 +65323,7 @@ var DashboardTable = function (_React$Component) {
                                   'span',
                                   { style: { color: _this2.overmatchColor(EnemyShip, "a") } },
                                   '    ',
-                                  'atk:'
+                                  '-atk:'
                                 ),
                                 _react2.default.createElement(
                                   'span',
@@ -65365,7 +65365,7 @@ var DashboardTable = function (_React$Component) {
                                   'span',
                                   { style: { color: _this2.overmatchColor(EnemyShip, "d") } },
                                   '    ',
-                                  'def:'
+                                  '-def:'
                                 ),
                                 _react2.default.createElement(
                                   'span',
@@ -65501,7 +65501,7 @@ var DashboardTable = function (_React$Component) {
                                   'span',
                                   { style: { color: _this2.overmatchColor(EnemyShip, "a") } },
                                   '    ',
-                                  'atk:'
+                                  '-atk:'
                                 ),
                                 _react2.default.createElement(
                                   'span',
@@ -65543,7 +65543,7 @@ var DashboardTable = function (_React$Component) {
                                   'span',
                                   { style: { color: _this2.overmatchColor(EnemyShip, "d") } },
                                   '    ',
-                                  'def:'
+                                  '-def:'
                                 ),
                                 _react2.default.createElement(
                                   'span',
@@ -65649,7 +65649,7 @@ var DashboardTable = function (_React$Component) {
                                   'span',
                                   { style: { color: _this2.overmatchColor(EnemyShip, "a") } },
                                   '    ',
-                                  'atk:'
+                                  '-atk:'
                                 ),
                                 _react2.default.createElement(
                                   'span',
@@ -65691,7 +65691,7 @@ var DashboardTable = function (_React$Component) {
                                   'span',
                                   { style: { color: _this2.overmatchColor(EnemyShip, "d") } },
                                   '    ',
-                                  'def:'
+                                  '-def:'
                                 ),
                                 _react2.default.createElement(
                                   'span',
